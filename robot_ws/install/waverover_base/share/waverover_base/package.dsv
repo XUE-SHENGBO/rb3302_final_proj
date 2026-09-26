@@ -1,9 +1,0 @@
-source;share/waverover_base/hook/pythonpath.ps1
-source;share/waverover_base/hook/pythonpath.dsv
-source;share/waverover_base/hook/pythonpath.sh
-source;share/waverover_base/hook/ament_prefix_path.ps1
-source;share/waverover_base/hook/ament_prefix_path.dsv
-source;share/waverover_base/hook/ament_prefix_path.sh
-source;../../build/waverover_base/share/waverover_base/hook/pythonpath_develop.ps1
-source;../../build/waverover_base/share/waverover_base/hook/pythonpath_develop.dsv
-source;../../build/waverover_base/share/waverover_base/hook/pythonpath_develop.sh

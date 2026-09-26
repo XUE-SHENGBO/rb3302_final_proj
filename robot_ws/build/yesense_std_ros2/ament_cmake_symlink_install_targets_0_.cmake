@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_std_ros2/yesense_node_publisher" "/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_std_ros2/yesense_node_subscriber" "TARGETS" "yesense_node_publisher" "yesense_node_subscriber" "DESTINATION" "lib/yesense_std_ros2")

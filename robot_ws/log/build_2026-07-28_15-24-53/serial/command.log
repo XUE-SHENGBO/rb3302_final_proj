@@ -1,4 +1,0 @@
-Invoking command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial -- -j8 -l8
-Invoked command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial -- -j8 -l8
-Invoking command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial
-Invoked command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial

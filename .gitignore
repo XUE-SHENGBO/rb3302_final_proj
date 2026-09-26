@@ -1,9 +1,15 @@
+# 忽略整个 robot_ws
 /robot_ws/
-/student_ws/
+
+# student_ws 只保留 src 中的 competition_manager
+/student_ws/*
+!/student_ws/src/
+/student_ws/src/*
+!/student_ws/src/competition_manager/
+
+# 编译产物和 Python 缓存
 build/
 install/
 log/
-src/
-!/student_ws/src/competition_manager/
-robot_ws/src/rplidar_ros
-robot_ws/src/rplidar_ros
+__pycache__/
+*.pyc

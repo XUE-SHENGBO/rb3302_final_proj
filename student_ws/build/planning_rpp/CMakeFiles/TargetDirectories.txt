@@ -1,9 +1,0 @@
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/uninstall.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/planning_rpp_uninstall.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/test.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/edit_cache.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/rebuild_cache.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/list_install_components.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/install.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/install/local.dir
-/home/ubuntu/rb3302_final_proj_code/student_ws/build/planning_rpp/CMakeFiles/install/strip.dir

@@ -1,3 +1,0 @@
-[console_scripts]
-keyboard_teleop = waverover_base.keyboard_teleop:main
-waverover_driver = waverover_base.waverover_driver:main
