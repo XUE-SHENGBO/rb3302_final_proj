@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: waverover-base
+Version: 0.0.4
+Summary: WAVE ROVER base driver, feedback, display battery percentage, and keyboard teleop.
+Maintainer: user
+Maintainer-email: user@example.com
+License: MIT

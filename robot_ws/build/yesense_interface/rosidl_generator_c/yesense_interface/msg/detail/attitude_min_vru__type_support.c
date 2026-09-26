@@ -1,0 +1,19 @@
+// generated from rosidl_generator_c/resource/idl__type_support.c.em
+// with input from yesense_interface:msg/AttitudeMinVru.idl
+// generated code does not contain a copyright notice
+
+#include <string.h>
+
+#include "yesense_interface/msg/detail/attitude_min_vru__struct.h"
+#include "rosidl_typesupport_interface/macros.h"
+#include "yesense_interface/msg/detail/attitude_min_vru__type_support.h"
+#include "yesense_interface/msg/detail/attitude_min_vru__functions.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#ifdef __cplusplus
+}
+#endif

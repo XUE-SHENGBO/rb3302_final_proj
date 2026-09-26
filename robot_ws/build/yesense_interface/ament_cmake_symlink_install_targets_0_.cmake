@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/rosidl_generator_py/yesense_interface/yesense_interface_s__rosidl_typesupport_fastrtps_c.so" "TARGETS" "yesense_interface_s__rosidl_typesupport_fastrtps_c" "DESTINATION" "lib/python3.12/site-packages/yesense_interface")

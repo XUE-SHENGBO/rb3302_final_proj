@@ -1,0 +1,497 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "yesense_interface/msg/NavAll",
+      "fields": [
+        {
+          "name": "tid",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Tid"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "acc",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/ThreeAxis"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "gyro",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/ThreeAxis"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "euler",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/EulerAngle"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "quat",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Quat"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "temp",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/SensorTemp"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "pos",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/GnssPos"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "status",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/NavStatus"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "vel",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Vel"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "utc",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Utc"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "pressure",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Pressure"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "yesense_interface/msg/EulerAngle",
+        "fields": [
+          {
+            "name": "pitch",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "roll",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "yaw",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/GnssPos",
+        "fields": [
+          {
+            "name": "longitude",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "latitude",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "altitude",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/NavStatus",
+        "fields": [
+          {
+            "name": "fusion_status",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "gnss_status",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Pressure",
+        "fields": [
+          {
+            "name": "val",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Quat",
+        "fields": [
+          {
+            "name": "q0",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "q1",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "q2",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "q3",
+            "type": {
+              "type_id": 11,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/SensorTemp",
+        "fields": [
+          {
+            "name": "temp",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/ThreeAxis",
+        "fields": [
+          {
+            "name": "x",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "y",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "z",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Tid",
+        "fields": [
+          {
+            "name": "tid",
+            "type": {
+              "type_id": 5,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Utc",
+        "fields": [
+          {
+            "name": "year",
+            "type": {
+              "type_id": 5,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "month",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "day",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "hour",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "min",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "sec",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "ms",
+            "type": {
+              "type_id": 7,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Vel",
+        "fields": [
+          {
+            "name": "vel_e",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "vel_n",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "vel_u",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "yesense_interface/msg/NavAll",
+      "hash_string": "RIHS01_b083ae4cf3ea911c3bb9fe0a7838dc1cc72e3fd590e7234ffa2af8f6cc1f5cc8"
+    },
+    {
+      "type_name": "yesense_interface/msg/EulerAngle",
+      "hash_string": "RIHS01_4824925750f9636e0be37d8df3a73cdaf862a377b2c45db52b29a681528db38a"
+    },
+    {
+      "type_name": "yesense_interface/msg/GnssPos",
+      "hash_string": "RIHS01_c685b695fe24b8564027b055dbd53cfc85608b6447d4c5933e8ced501ca608b6"
+    },
+    {
+      "type_name": "yesense_interface/msg/NavStatus",
+      "hash_string": "RIHS01_b08e055a7ffe7ecde91723ec3a3b13eb8916873bf0bf52d105333982fd5c1f26"
+    },
+    {
+      "type_name": "yesense_interface/msg/Pressure",
+      "hash_string": "RIHS01_62943f5a83159d9660868be7993aa790a3fed6d408e6a2f6e91798bad3458b6e"
+    },
+    {
+      "type_name": "yesense_interface/msg/Quat",
+      "hash_string": "RIHS01_dd13c845e486d1189b5c6a93a16b29430f5599c85e43459810e0886a90f185f0"
+    },
+    {
+      "type_name": "yesense_interface/msg/SensorTemp",
+      "hash_string": "RIHS01_008fd17a7f2e91ddf8e86ecb5e0ad831514186a615cefd3133daf9d37ad70f5b"
+    },
+    {
+      "type_name": "yesense_interface/msg/ThreeAxis",
+      "hash_string": "RIHS01_85ef8751d824a2bfebaf9a857cb2b84782323a9a5df7779cb93312a73e54fdae"
+    },
+    {
+      "type_name": "yesense_interface/msg/Tid",
+      "hash_string": "RIHS01_a1d01188ff8f50390469dbbf7b8ea1b729f016f8003d5d1ae3623de38cf95f58"
+    },
+    {
+      "type_name": "yesense_interface/msg/Utc",
+      "hash_string": "RIHS01_a181fc336199324aa7647a7191cc5b145be63cb0882e070c028347928f7bad2c"
+    },
+    {
+      "type_name": "yesense_interface/msg/Vel",
+      "hash_string": "RIHS01_5b99e2eb7de8ddb9b694d8585ca33ae4bf39ff62fd61d2dc5274abdb0cf0dee8"
+    }
+  ]
+}

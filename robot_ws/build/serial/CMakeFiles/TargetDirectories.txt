@@ -1,0 +1,10 @@
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/uninstall.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/serial_uninstall.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/serial.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/test.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/edit_cache.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/list_install_components.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/install.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/install/local.dir
+/home/ubuntu/rb3302_final_proj_code/robot_ws/build/serial/CMakeFiles/install/strip.dir

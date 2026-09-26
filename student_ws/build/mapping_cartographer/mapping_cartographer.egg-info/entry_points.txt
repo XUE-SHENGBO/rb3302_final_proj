@@ -1,0 +1,2 @@
+[console_scripts]
+scan_time_normalizer = mapping_cartographer.scan_time_normalizer:main

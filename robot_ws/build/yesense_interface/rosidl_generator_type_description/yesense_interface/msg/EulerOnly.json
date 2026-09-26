@@ -1,0 +1,95 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "yesense_interface/msg/EulerOnly",
+      "fields": [
+        {
+          "name": "tid",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/Tid"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "euler",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "yesense_interface/msg/EulerAngle"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "yesense_interface/msg/EulerAngle",
+        "fields": [
+          {
+            "name": "pitch",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "roll",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "yaw",
+            "type": {
+              "type_id": 10,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "yesense_interface/msg/Tid",
+        "fields": [
+          {
+            "name": "tid",
+            "type": {
+              "type_id": 5,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "yesense_interface/msg/EulerOnly",
+      "hash_string": "RIHS01_a9d6f76e8b8f588b60c50288d4cf47299f650ac82d665cf2c72585ec2b67e430"
+    },
+    {
+      "type_name": "yesense_interface/msg/EulerAngle",
+      "hash_string": "RIHS01_4824925750f9636e0be37d8df3a73cdaf862a377b2c45db52b29a681528db38a"
+    },
+    {
+      "type_name": "yesense_interface/msg/Tid",
+      "hash_string": "RIHS01_a1d01188ff8f50390469dbbf7b8ea1b729f016f8003d5d1ae3623de38cf95f58"
+    }
+  ]
+}

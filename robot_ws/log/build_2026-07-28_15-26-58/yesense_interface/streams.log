@@ -1,0 +1,618 @@
+[0.038s] Invoking command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake /home/ubuntu/rb3302_final_proj_code/robot_ws/src/yesense_interface -DCMAKE_INSTALL_PREFIX=/home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface
+[0.074s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.296s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.397s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[0.411s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.519s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.616s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[1.437s] -- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[1.735s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.039s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.042s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[2.734s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[2.937s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.950s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[3.001s] -- Added test 'lint_cmake' to check CMake code style
+[3.004s] -- Added test 'xmllint' to check XML markup files
+[3.015s] -- Configuring done (2.9s)
+[3.150s] -- Generating done (0.1s)
+[3.172s] -- Build files have been written to: /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface
+[3.184s] Invoked command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake /home/ubuntu/rb3302_final_proj_code/robot_ws/src/yesense_interface -DCMAKE_INSTALL_PREFIX=/home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface
+[3.187s] Invoking command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface -- -j8 -l8
+[3.270s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[3.469s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[3.479s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[3.483s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.530s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.575s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[4.140s] -- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[4.332s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.604s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.606s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[5.112s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[5.270s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[5.287s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[5.311s] -- Added test 'lint_cmake' to check CMake code style
+[5.313s] -- Added test 'xmllint' to check XML markup files
+[5.318s] -- Configuring done (2.1s)
+[5.422s] -- Generating done (0.1s)
+[5.440s] -- Build files have been written to: /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface
+[5.475s] gmake[2]: Warning: File '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/yesense_interface__rs/CMakeFiles/yesense_interface__rs.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.476s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_type_description.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.477s] gmake[2]: Warning: File 'CMakeFiles/ament_cmake_python_symlink_yesense_interface.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.492s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.495s] gmake[2]: Warning: File '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/yesense_interface__rs/CMakeFiles/yesense_interface__rs.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.496s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.511s] [  0%] Built target yesense_interface__rs
+[5.513s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.515s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.516s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_type_description.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.517s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.518s] gmake[2]: Warning: File 'CMakeFiles/ament_cmake_python_symlink_yesense_interface.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.534s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.550s] [  0%] Built target ament_cmake_python_symlink_yesense_interface
+[5.550s] [  1%] Built target yesense_interface__rosidl_generator_type_description
+[5.555s] gmake[2]: Warning: File 'CMakeFiles/ament_cmake_python_build_yesense_interface_egg.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.558s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__cpp.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.559s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_c.dir/flags.make' has modification time 2941210 s in the future
+[5.576s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.578s] gmake[2]: Warning: File 'CMakeFiles/ament_cmake_python_build_yesense_interface_egg.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.595s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.597s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__cpp.dir/compiler_depend.make' has modification time 2941210 s in the future
+[5.598s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.613s] [  1%] Built target yesense_interface__cpp
+[5.617s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.648s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_c.dir/flags.make' has modification time 2941210 s in the future
+[5.649s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.684s] [ 29%] Built target yesense_interface__rosidl_generator_c
+[5.688s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_fastrtps_c.dir/flags.make' has modification time 2941209 s in the future
+[5.688s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_introspection_c.dir/flags.make' has modification time 2941210 s in the future
+[5.696s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_cpp.dir/flags.make' has modification time 2941210 s in the future
+[5.696s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_introspection_cpp.dir/flags.make' has modification time 2941210 s in the future
+[5.697s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_c.dir/flags.make' has modification time 2941210 s in the future
+[5.703s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_fastrtps_cpp.dir/flags.make' has modification time 2941210 s in the future
+[5.728s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.729s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.731s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.738s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_fastrtps_c.dir/flags.make' has modification time 2941209 s in the future
+[5.739s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_introspection_cpp.dir/flags.make' has modification time 2941209 s in the future
+[5.740s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.740s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.741s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.746s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_introspection_c.dir/flags.make' has modification time 2941209 s in the future
+[5.746s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.753s] [ 49%] Built target yesense_interface__rosidl_typesupport_introspection_cpp
+[5.753s] [ 49%] Built target yesense_interface__rosidl_typesupport_fastrtps_c
+[5.756s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_cpp.dir/flags.make' has modification time 2941209 s in the future
+[5.757s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.760s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.769s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.772s] [ 58%] Built target yesense_interface__rosidl_typesupport_cpp
+[5.776s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_c.dir/flags.make' has modification time 2941209 s in the future
+[5.778s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_typesupport_fastrtps_cpp.dir/flags.make' has modification time 2941209 s in the future
+[5.778s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.779s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.784s] [ 68%] Built target yesense_interface__rosidl_typesupport_introspection_c
+[5.792s] [ 78%] Built target yesense_interface__rosidl_typesupport_c
+[5.817s] [ 88%] Built target yesense_interface__rosidl_typesupport_fastrtps_cpp
+[5.823s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface.dir/compiler_depend.make' has modification time 2941209 s in the future
+[5.838s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.844s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface.dir/compiler_depend.make' has modification time 2941209 s in the future
+[5.844s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.875s] [ 88%] Built target yesense_interface
+[5.886s] gmake[2]: Warning: File '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/yesense_interface__py/CMakeFiles/yesense_interface__py.dir/compiler_depend.make' has modification time 2941209 s in the future
+[5.903s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.906s] gmake[2]: Warning: File '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/yesense_interface__py/CMakeFiles/yesense_interface__py.dir/compiler_depend.make' has modification time 2941209 s in the future
+[5.907s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[5.936s] [ 88%] Built target yesense_interface__py
+[5.939s] running egg_info
+[5.943s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_py.dir/flags.make' has modification time 2941209 s in the future
+[5.972s] writing yesense_interface.egg-info/PKG-INFO
+[5.973s] writing dependency_links to yesense_interface.egg-info/dependency_links.txt
+[5.974s] writing top-level names to yesense_interface.egg-info/top_level.txt
+[5.996s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.004s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface__rosidl_generator_py.dir/flags.make' has modification time 2941209 s in the future
+[6.005s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.020s] [ 97%] Built target yesense_interface__rosidl_generator_py
+[6.025s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_introspection_c.dir/flags.make' has modification time 2941209 s in the future
+[6.025s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_c.dir/flags.make' has modification time 2941209 s in the future
+[6.027s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_fastrtps_c.dir/flags.make' has modification time 2941209 s in the future
+[6.042s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.045s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_c.dir/flags.make' has modification time 2941209 s in the future
+[6.046s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.059s] [ 98%] Built target yesense_interface_s__rosidl_typesupport_c
+[6.060s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.067s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_introspection_c.dir/flags.make' has modification time 2941209 s in the future
+[6.070s] reading manifest file 'yesense_interface.egg-info/SOURCES.txt'
+[6.072s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.072s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.073s] writing manifest file 'yesense_interface.egg-info/SOURCES.txt'
+[6.082s] gmake[2]: Warning: File 'CMakeFiles/yesense_interface_s__rosidl_typesupport_fastrtps_c.dir/flags.make' has modification time 2941209 s in the future
+[6.085s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.100s] [ 99%] Built target yesense_interface_s__rosidl_typesupport_fastrtps_c
+[6.106s] [100%] Built target yesense_interface_s__rosidl_typesupport_introspection_c
+[6.116s] gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[6.132s] [100%] Built target ament_cmake_python_build_yesense_interface_egg
+[6.180s] Invoked command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface -- -j8 -l8
+[6.189s] Invoking command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface
+[6.207s] -- Install configuration: ""
+[6.209s] -- Execute custom install script
+[6.211s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/ament_index/resource_index/rosidl_interfaces/yesense_interface
+[6.213s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Tid.json
+[6.214s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ThreeAxis.json
+[6.216s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SensorTemp.json
+[6.217s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Pressure.json
+[6.218s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerAngle.json
+[6.219s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Quat.json
+[6.221s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/GnssPos.json
+[6.222s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavStatus.json
+[6.223s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Vel.json
+[6.224s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Utc.json
+[6.226s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SampleTimestamp.json
+[6.228s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuData.json
+[6.230s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuDataTenAxis.json
+[6.231s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerOnly.json
+[6.232s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/RobotLord.json
+[6.234s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinVru.json
+[6.235s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinAhrs.json
+[6.237s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeAllData.json
+[6.238s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/PosOnly.json
+[6.239s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMin.json
+[6.240s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMinUtc.json
+[6.242s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavAll.json
+[6.244s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_all_data.h
+[6.246s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_min_ahrs.h
+[6.249s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_min_vru.h
+[6.251s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__functions.h
+[6.254s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__struct.h
+[6.256s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__type_support.h
+[6.258s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__functions.h
+[6.259s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__struct.h
+[6.260s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__type_support.h
+[6.261s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__functions.h
+[6.262s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__struct.h
+[6.263s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__type_support.h
+[6.265s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__functions.h
+[6.266s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__struct.h
+[6.267s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__type_support.h
+[6.268s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__functions.h
+[6.269s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__struct.h
+[6.270s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__type_support.h
+[6.271s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__functions.h
+[6.273s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__struct.h
+[6.274s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__type_support.h
+[6.275s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__functions.h
+[6.276s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__struct.h
+[6.277s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__type_support.h
+[6.279s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__functions.h
+[6.280s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__struct.h
+[6.281s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__type_support.h
+[6.282s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__functions.h
+[6.283s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__struct.h
+[6.284s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__type_support.h
+[6.285s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__functions.h
+[6.285s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__struct.h
+[6.286s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__type_support.h
+[6.286s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__functions.h
+[6.287s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__struct.h
+[6.287s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__type_support.h
+[6.287s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__functions.h
+[6.288s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__struct.h
+[6.288s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__type_support.h
+[6.289s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__functions.h
+[6.290s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__struct.h
+[6.291s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__type_support.h
+[6.291s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__functions.h
+[6.292s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__struct.h
+[6.293s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__type_support.h
+[6.293s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__functions.h
+[6.294s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__struct.h
+[6.294s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__type_support.h
+[6.295s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__functions.h
+[6.295s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__struct.h
+[6.296s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__type_support.h
+[6.296s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__functions.h
+[6.297s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__struct.h
+[6.297s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__type_support.h
+[6.297s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__functions.h
+[6.298s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__struct.h
+[6.298s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__type_support.h
+[6.299s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__functions.h
+[6.300s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__struct.h
+[6.301s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__type_support.h
+[6.301s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__functions.h
+[6.302s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__struct.h
+[6.303s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__type_support.h
+[6.303s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__functions.h
+[6.304s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__struct.h
+[6.305s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__type_support.h
+[6.305s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__functions.h
+[6.306s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__struct.h
+[6.307s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__type_support.h
+[6.307s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/euler_angle.h
+[6.308s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/euler_only.h
+[6.309s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/gnss_pos.h
+[6.309s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/imu_data.h
+[6.310s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/imu_data_ten_axis.h
+[6.310s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_all.h
+[6.311s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_min.h
+[6.311s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_min_utc.h
+[6.311s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_status.h
+[6.312s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/pos_only.h
+[6.313s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/pressure.h
+[6.313s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/quat.h
+[6.314s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/robot_lord.h
+[6.314s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/rosidl_generator_c__visibility_control.h
+[6.315s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/sample_timestamp.h
+[6.315s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/sensor_temp.h
+[6.316s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/three_axis.h
+[6.316s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/tid.h
+[6.317s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/utc.h
+[6.317s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/vel.h
+[6.318s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/library_path.sh
+[6.319s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/library_path.dsv
+[6.319s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__rosidl_typesupport_fastrtps_c.h
+[6.320s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__rosidl_typesupport_fastrtps_c.h
+[6.320s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__rosidl_typesupport_fastrtps_c.h
+[6.321s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__rosidl_typesupport_fastrtps_c.h
+[6.321s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__rosidl_typesupport_fastrtps_c.h
+[6.322s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__rosidl_typesupport_fastrtps_c.h
+[6.322s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__rosidl_typesupport_fastrtps_c.h
+[6.323s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__rosidl_typesupport_fastrtps_c.h
+[6.323s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__rosidl_typesupport_fastrtps_c.h
+[6.324s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__rosidl_typesupport_fastrtps_c.h
+[6.324s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__rosidl_typesupport_fastrtps_c.h
+[6.325s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__rosidl_typesupport_fastrtps_c.h
+[6.325s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__rosidl_typesupport_fastrtps_c.h
+[6.326s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__rosidl_typesupport_fastrtps_c.h
+[6.326s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__rosidl_typesupport_fastrtps_c.h
+[6.326s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__rosidl_typesupport_fastrtps_c.h
+[6.327s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__rosidl_typesupport_fastrtps_c.h
+[6.327s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__rosidl_typesupport_fastrtps_c.h
+[6.328s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__rosidl_typesupport_fastrtps_c.h
+[6.328s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__rosidl_typesupport_fastrtps_c.h
+[6.329s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__rosidl_typesupport_fastrtps_c.h
+[6.329s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__rosidl_typesupport_fastrtps_c.h
+[6.330s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[6.330s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__rosidl_typesupport_introspection_c.h
+[6.331s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__rosidl_typesupport_introspection_c.h
+[6.331s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__rosidl_typesupport_introspection_c.h
+[6.331s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__rosidl_typesupport_introspection_c.h
+[6.332s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__rosidl_typesupport_introspection_c.h
+[6.332s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__rosidl_typesupport_introspection_c.h
+[6.333s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__rosidl_typesupport_introspection_c.h
+[6.333s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__rosidl_typesupport_introspection_c.h
+[6.334s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__rosidl_typesupport_introspection_c.h
+[6.334s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__rosidl_typesupport_introspection_c.h
+[6.335s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__rosidl_typesupport_introspection_c.h
+[6.335s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__rosidl_typesupport_introspection_c.h
+[6.335s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__rosidl_typesupport_introspection_c.h
+[6.336s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__rosidl_typesupport_introspection_c.h
+[6.336s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__rosidl_typesupport_introspection_c.h
+[6.337s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__rosidl_typesupport_introspection_c.h
+[6.337s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__rosidl_typesupport_introspection_c.h
+[6.337s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__rosidl_typesupport_introspection_c.h
+[6.338s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__rosidl_typesupport_introspection_c.h
+[6.338s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__rosidl_typesupport_introspection_c.h
+[6.339s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__rosidl_typesupport_introspection_c.h
+[6.339s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__rosidl_typesupport_introspection_c.h
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_all_data.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_min_ahrs.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/attitude_min_vru.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__builder.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__struct.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__traits.hpp
+[6.340s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__type_support.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__builder.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__struct.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__traits.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__type_support.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__builder.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__struct.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__traits.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__type_support.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__builder.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__struct.hpp
+[6.341s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__traits.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__type_support.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__builder.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__struct.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__traits.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__type_support.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__builder.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__struct.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__traits.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__type_support.hpp
+[6.342s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__builder.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__struct.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__traits.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__type_support.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__builder.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__struct.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__traits.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__type_support.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__builder.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__struct.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__traits.hpp
+[6.343s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__type_support.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__builder.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__struct.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__traits.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__type_support.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__builder.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__struct.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__traits.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__type_support.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__builder.hpp
+[6.344s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__struct.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__traits.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__type_support.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__builder.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__struct.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__traits.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__type_support.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__builder.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__struct.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__traits.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__type_support.hpp
+[6.345s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__builder.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__struct.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__traits.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__type_support.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__builder.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__struct.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__traits.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__type_support.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__builder.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__struct.hpp
+[6.346s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__traits.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__type_support.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__builder.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__struct.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__traits.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__type_support.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__builder.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__struct.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__traits.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__type_support.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__builder.hpp
+[6.347s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__struct.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__traits.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__type_support.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__builder.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__struct.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__traits.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__type_support.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__builder.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__struct.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__traits.hpp
+[6.348s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__type_support.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/euler_angle.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/euler_only.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/gnss_pos.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/imu_data.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/imu_data_ten_axis.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_all.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_min.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_min_utc.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/nav_status.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/pos_only.hpp
+[6.349s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/pressure.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/quat.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/robot_lord.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/rosidl_generator_cpp__visibility_control.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/sample_timestamp.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/sensor_temp.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/three_axis.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/tid.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/utc.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/vel.hpp
+[6.350s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__rosidl_typesupport_fastrtps_cpp.hpp
+[6.351s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__rosidl_typesupport_fastrtps_cpp.hpp
+[6.352s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__rosidl_typesupport_fastrtps_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__rosidl_typesupport_fastrtps_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_all_data__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_ahrs__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/attitude_min_vru__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_angle__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/euler_only__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/gnss_pos__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/imu_data_ten_axis__rosidl_typesupport_introspection_cpp.hpp
+[6.353s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_all__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_min_utc__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/nav_status__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pos_only__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/pressure__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/quat__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/robot_lord__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sample_timestamp__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/sensor_temp__rosidl_typesupport_introspection_cpp.hpp
+[6.354s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/three_axis__rosidl_typesupport_introspection_cpp.hpp
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/tid__rosidl_typesupport_introspection_cpp.hpp
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/utc__rosidl_typesupport_introspection_cpp.hpp
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/include/yesense_interface/yesense_interface/msg/detail/vel__rosidl_typesupport_introspection_cpp.hpp
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/pythonpath.sh
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/pythonpath.dsv
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface-1.0.0-py3.12.egg-info/PKG-INFO
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface-1.0.0-py3.12.egg-info/SOURCES.txt
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface-1.0.0-py3.12.egg-info/dependency_links.txt
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface-1.0.0-py3.12.egg-info/top_level.txt
+[6.355s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/__init__.py
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/_yesense_interface_s.ep.rosidl_typesupport_c.c
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/_yesense_interface_s.ep.rosidl_typesupport_fastrtps_c.c
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/_yesense_interface_s.ep.rosidl_typesupport_introspection_c.c
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/__init__.py
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_all_data.py
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_all_data_s.c
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_min_ahrs.py
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_min_ahrs_s.c
+[6.356s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_min_vru.py
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_attitude_min_vru_s.c
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_euler_angle.py
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_euler_angle_s.c
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_euler_only.py
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_euler_only_s.c
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_gnss_pos.py
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_gnss_pos_s.c
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_imu_data.py
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_imu_data_s.c
+[6.357s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_imu_data_ten_axis.py
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_imu_data_ten_axis_s.c
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_all.py
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_all_s.c
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_min.py
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_min_s.c
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_min_utc.py
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_min_utc_s.c
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_status.py
+[6.358s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_nav_status_s.c
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_pos_only.py
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_pos_only_s.c
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_pressure.py
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_pressure_s.c
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_quat.py
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_quat_s.c
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_robot_lord.py
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_robot_lord_s.c
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_sample_timestamp.py
+[6.359s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_sample_timestamp_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_sensor_temp.py
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_sensor_temp_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_three_axis.py
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_three_axis_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_tid.py
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_tid_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_utc.py
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_utc_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_vel.py
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg/_vel_s.c
+[6.360s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_fastrtps_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_introspection_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_fastrtps_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_introspection_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/yesense_interface_s__rosidl_typesupport_c.so
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/ament_index/resource_index/rust_packages/yesense_interface
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/rust/Cargo.toml
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/rust/build.rs
+[6.361s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/rust/src/lib.rs
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/rust/src/msg.rs
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/rust/src/msg/rmw.rs
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Tid.idl
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ThreeAxis.idl
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SensorTemp.idl
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Pressure.idl
+[6.362s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerAngle.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Quat.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/GnssPos.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavStatus.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Vel.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Utc.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SampleTimestamp.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuData.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuDataTenAxis.idl
+[6.363s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerOnly.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/RobotLord.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinVru.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinAhrs.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeAllData.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/PosOnly.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMin.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMinUtc.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavAll.idl
+[6.364s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Tid.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ThreeAxis.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SensorTemp.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Pressure.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerAngle.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Quat.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/GnssPos.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavStatus.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Vel.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/Utc.msg
+[6.365s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/SampleTimestamp.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuData.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/ImuDataTenAxis.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/EulerOnly.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/RobotLord.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinVru.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeMinAhrs.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/AttitudeAllData.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/PosOnly.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMin.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavMinUtc.msg
+[6.366s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/msg/NavAll.msg
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/ament_index/resource_index/package_run_dependencies/yesense_interface
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/ament_index/resource_index/parent_prefix_path/yesense_interface
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/ament_prefix_path.sh
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/ament_prefix_path.dsv
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/path.sh
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/environment/path.dsv
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/local_setup.bash
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/local_setup.sh
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/local_setup.zsh
+[6.367s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/local_setup.dsv
+[6.368s] -- Symlinking: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/package.dsv
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/ament_index/resource_index/packages/yesense_interface
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/rosidl_cmake-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/ament_cmake_export_libraries-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/ament_cmake_export_targets-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[6.368s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[6.369s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interfaceConfig.cmake
+[6.369s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interfaceConfig-version.cmake
+[6.369s] -- Up-to-date symlink: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/package.xml
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_generator_c.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_fastrtps_c.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_introspection_c.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_c.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_fastrtps_cpp.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_introspection_cpp.so
+[6.369s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_typesupport_cpp.so
+[6.370s] Listing '/home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface'...
+[6.370s] Compiling '/home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/__init__.py'...
+[6.370s] Listing '/home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/python3.12/site-packages/yesense_interface/msg'...
+[6.374s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/lib/libyesense_interface__rosidl_generator_py.so
+[6.374s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_generator_cExport.cmake
+[6.374s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_generator_cExport-noconfig.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_typesupport_fastrtps_cExport.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_introspection_cExport.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_cExport.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_cExport-noconfig.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_generator_cppExport.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_typesupport_fastrtps_cppExport.cmake
+[6.375s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_introspection_cppExport.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_cppExport.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/yesense_interface__rosidl_typesupport_cppExport-noconfig.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_generator_pyExport.cmake
+[6.376s] -- Up-to-date: /home/ubuntu/rb3302_final_proj_code/robot_ws/install/yesense_interface/share/yesense_interface/cmake/export_yesense_interface__rosidl_generator_pyExport-noconfig.cmake
+[6.379s] Invoked command in '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface

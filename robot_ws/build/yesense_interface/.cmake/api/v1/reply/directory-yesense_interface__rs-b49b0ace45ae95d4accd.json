@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "yesense_interface__rs",
+		"source" : "/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_interface/yesense_interface__rs"
+	}
+}

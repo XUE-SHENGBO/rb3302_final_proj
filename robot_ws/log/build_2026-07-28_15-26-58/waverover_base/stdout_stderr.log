@@ -1,0 +1,37 @@
+running develop
+Removing /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover-base.egg-link (link to .)
+running egg_info
+writing ../../build/waverover_base/waverover_base.egg-info/PKG-INFO
+writing dependency_links to ../../build/waverover_base/waverover_base.egg-info/dependency_links.txt
+writing entry points to ../../build/waverover_base/waverover_base.egg-info/entry_points.txt
+writing requirements to ../../build/waverover_base/waverover_base.egg-info/requires.txt
+writing top-level names to ../../build/waverover_base/waverover_base.egg-info/top_level.txt
+reading manifest file '../../build/waverover_base/waverover_base.egg-info/SOURCES.txt'
+writing manifest file '../../build/waverover_base/waverover_base.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build
+creating /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib
+creating /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base
+copying waverover_base/waverover_driver.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base
+copying waverover_base/keyboard_teleop.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base
+copying waverover_base/__init__.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base
+running install
+running install_lib
+creating /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base
+copying /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base/waverover_driver.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base
+copying /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base/keyboard_teleop.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base
+copying /home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/build/lib/waverover_base/__init__.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base
+byte-compiling /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base/waverover_driver.py to waverover_driver.cpython-312.pyc
+byte-compiling /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base/keyboard_teleop.py to keyboard_teleop.cpython-312.pyc
+byte-compiling /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base/__init__.py to __init__.cpython-312.pyc
+running install_data
+copying resource/waverover_base -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/share/ament_index/resource_index/packages
+copying package.xml -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/share/waverover_base
+copying launch/driver.launch.py -> /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/share/waverover_base/launch
+running install_egg_info
+Copying ../../build/waverover_base/waverover_base.egg-info to /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/python3.12/site-packages/waverover_base-0.0.4-py3.12.egg-info
+running install_scripts
+Installing keyboard_teleop script to /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/waverover_base
+Installing waverover_driver script to /home/ubuntu/rb3302_final_proj_code/robot_ws/install/waverover_base/lib/waverover_base
+writing list of installed files to '/home/ubuntu/rb3302_final_proj_code/robot_ws/build/waverover_base/install.log'

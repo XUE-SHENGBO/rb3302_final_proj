@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: mapping-cartographer
+Version: 1.0.0
+Summary: Student Cartographer mapping launch and baseline parameters for RB3302
+Maintainer: ldaowen
+Maintainer-email: ldaowen@gmail.com
+License: Apache-2.0

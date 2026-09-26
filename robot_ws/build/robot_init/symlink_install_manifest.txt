@@ -1,0 +1,16 @@
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/launch/robot.launch.py
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/ament_index/resource_index/package_run_dependencies/robot_init
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/ament_index/resource_index/parent_prefix_path/robot_init
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/environment/ament_prefix_path.sh
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/environment/ament_prefix_path.dsv
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/environment/path.sh
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/environment/path.dsv
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/local_setup.bash
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/local_setup.sh
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/local_setup.zsh
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/local_setup.dsv
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/package.dsv
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/ament_index/resource_index/packages/robot_init
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/cmake/robot_initConfig.cmake
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/cmake/robot_initConfig-version.cmake
+/home/ubuntu/rb3302_final_proj_code/robot_ws/install/robot_init/share/robot_init/package.xml

@@ -1,0 +1,9 @@
+source;share/mapping_cartographer/hook/pythonpath.ps1
+source;share/mapping_cartographer/hook/pythonpath.dsv
+source;share/mapping_cartographer/hook/pythonpath.sh
+source;share/mapping_cartographer/hook/ament_prefix_path.ps1
+source;share/mapping_cartographer/hook/ament_prefix_path.dsv
+source;share/mapping_cartographer/hook/ament_prefix_path.sh
+source;../../build/mapping_cartographer/share/mapping_cartographer/hook/pythonpath_develop.ps1
+source;../../build/mapping_cartographer/share/mapping_cartographer/hook/pythonpath_develop.dsv
+source;../../build/mapping_cartographer/share/mapping_cartographer/hook/pythonpath_develop.sh

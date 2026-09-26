@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing mapping_cartographer.egg-info/PKG-INFO
+writing dependency_links to mapping_cartographer.egg-info/dependency_links.txt
+writing entry points to mapping_cartographer.egg-info/entry_points.txt
+writing requirements to mapping_cartographer.egg-info/requires.txt
+writing top-level names to mapping_cartographer.egg-info/top_level.txt
+reading manifest file 'mapping_cartographer.egg-info/SOURCES.txt'
+writing manifest file 'mapping_cartographer.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/ubuntu/rb3302_final_proj_code/student_ws/install/mapping_cartographer/lib/python3.12/site-packages/mapping-cartographer.egg-link (link to .)
+Installing scan_time_normalizer script to /home/ubuntu/rb3302_final_proj_code/student_ws/install/mapping_cartographer/lib/mapping_cartographer
+
+Installed /home/ubuntu/rb3302_final_proj_code/student_ws/build/mapping_cartographer
+running symlink_data

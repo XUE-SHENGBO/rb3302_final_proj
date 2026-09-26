@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-5dc480fc66019c3b8364.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "yesense_std_ros2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-cd9484bb8ca6c87326bd.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "yesense_node_publisher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-yesense_node_publisher-dd470fd4aa4f69f61f37.json",
+					"name" : "yesense_node_publisher",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "yesense_node_subscriber::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-yesense_node_subscriber-9e46805d068c9acb9d94.json",
+					"name" : "yesense_node_subscriber",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "yesense_std_ros2_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-yesense_std_ros2_uninstall-866e1886afd8326ecaae.json",
+					"name" : "yesense_std_ros2_uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ubuntu/rb3302_final_proj_code/robot_ws/build/yesense_std_ros2",
+		"source" : "/home/ubuntu/rb3302_final_proj_code/robot_ws/src/yesense_std_ros2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
