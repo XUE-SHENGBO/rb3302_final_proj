@@ -1,0 +1,9 @@
+./robot_ws
+./student_ws/build
+./student_ws/images
+./student_ws/install
+./student_ws/log/*
+./student_ws/maps
+./student_ws/src/mappting_cartographer
+./student_ws/src/planning_astar
+./student_ws/src/planning_rpp
