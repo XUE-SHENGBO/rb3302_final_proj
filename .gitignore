@@ -5,3 +5,5 @@ install/
 log/
 src/
 !/student_ws/src/competition_manager/
+robot_ws/src/rplidar_ros
+robot_ws/src/rplidar_ros
