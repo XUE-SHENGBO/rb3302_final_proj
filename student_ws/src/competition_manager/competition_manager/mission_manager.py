@@ -13,6 +13,32 @@ from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 from rclpy.parameter import Parameter
 from rclpy.signals import SignalHandlerOptions
 
+letter_pos_map={
+    'A':(1.6514630317687988,-0.08509742468595505),
+    'B':(1.088031530380249, -0.10565447062253952),
+    'C':(0.46405327320098877,-0.09198123961687088),
+    'D':(-0.11078454554080963,-0.08715619891881943),
+    'E':(-0.6893330812454224,-0.10935278981924057),
+    'F':(-1.2777215242385864,-0.085807204246521),
+    'G':(1.6867185831069946,0.4627726376056671),
+    'H':(1.0710629224777222,0.46948617696762085),
+    'I':(0.5010952353477478,0.4675194323062897),
+    'J':(-0.09818114340305328,0.4497152864933014),
+    'K':(-0.7096237540245056,0.4855393171310425),
+    'L':(-1.2867027521133423,0.47032997012138367),
+    'M':(1.663408875465393,1.0750311613082886),
+    'N':(1.1118243932724,1.0824636220932007),
+    'O':(0.46875935792922974,1.0902024507522583),
+    'P':(-0.09403415769338608,1.0922552347183228),
+    'Q':(-0.6912289261817932,1.0864468812942505),
+    'R':(-1.2855602502822876,1.1045721769332886),
+    'S':(1.6706331968307495,1.6458920240402222),
+    'T':(1.102006196975708,1.6640079021453857),
+    'U':(0.49858278036117554,1.6451228857040405),
+    'V':(-0.10852397978305817,1.670001745223999),
+    'W':(-0.7471744418144226,1.6658536195755005),
+    'X':(-1.275559425354004,1.6493488550186157),
+}
 
 def parse_poses(values, name, single=False):
     """Validate a flattened ROS double array of x, y, yaw triples."""
@@ -29,7 +55,7 @@ class MissionManager(BasicNavigator):
 
     def __init__(self):
         super().__init__(node_name='mission_manager')
-        self.declare_parameter('goals', Parameter.Type.DOUBLE_ARRAY)
+        self.declare_parameter('goals', Parameter.Type.STRING)
         self.declare_parameter('initial_pose', Parameter.Type.DOUBLE_ARRAY)
         self.declare_parameter('set_initial_pose', False)
         self.declare_parameter('map_frame', 'map')
@@ -57,7 +83,17 @@ class MissionManager(BasicNavigator):
     def run_mission(self):
         """Wait for localisation, then navigate the configured route in order."""
         # Validate the complete mission before submitting any motion request.
-        goals = parse_poses(self.get_parameter('goals').value, 'goals')
+        goals_str = self.get_parameter('goals').value
+        if not isinstance(goals_str, str):
+            raise ValueError('goals must be a letter route such as "ABC" or "A,B,C"')
+        letters = ''.join(goals_str.upper().replace(',', ' ').split())
+        if not letters:
+            raise ValueError('goals must contain at least one letter from A to X')
+        unknown = sorted(set(letters) - letter_pos_map.keys())
+        if unknown:
+            raise ValueError(f'goals contains unknown letters: {", ".join(unknown)}')
+        # The measured map contains positions only; use map-frame yaw 0 radians.
+        goals = [(*letter_pos_map[letter], 0.0) for letter in letters]
         timeout = self.get_parameter('goal_timeout_sec').value
         if not math.isfinite(timeout) or timeout <= 0:
             raise ValueError('goal_timeout_sec must be finite and positive')

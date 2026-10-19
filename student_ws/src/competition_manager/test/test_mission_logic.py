@@ -12,20 +12,26 @@ import pytest
 # Load the policy definitions without importing unavailable ROS dependencies.
 source = Path(__file__).parents[1] / 'competition_manager' / 'mission_manager.py'
 tree = ast.parse(source.read_text())
+letter_pos_map = next(
+    ast.literal_eval(item.value) for item in tree.body
+    if isinstance(item, ast.Assign)
+    and any(isinstance(target, ast.Name) and target.id == 'letter_pos_map'
+            for target in item.targets))
 tree.body = [item for item in tree.body if isinstance(item, (ast.FunctionDef, ast.ClassDef))]
 namespace = {
     'math': math, 'BasicNavigator': object,
     'TaskResult': SimpleNamespace(SUCCEEDED=1),
     'time': SimpleNamespace(monotonic=lambda: 0.0),
+    'letter_pos_map': letter_pos_map,
 }
 exec(compile(tree, str(source), 'exec'), namespace)
 parse_poses = namespace['parse_poses']
 
 
-def make_node(results):
+def make_node(results, goals='AB'):
     cls = namespace['MissionManager']
     node = cls.__new__(cls)
-    values = {'goals': [1., 2., 0., 3., 4., 0.], 'goal_timeout_sec': 10.,
+    values = {'goals': goals, 'goal_timeout_sec': 10.,
               'map_frame': 'map', 'set_initial_pose': False}
     node.get_parameter = lambda name: SimpleNamespace(value=values[name])
     node.get_logger = Mock(return_value=Mock())
@@ -45,11 +51,28 @@ def test_invalid_route(values):
         parse_poses(values, 'goals')
 
 
-def test_ordered_success():
-    node = make_node([1, 1])
+@pytest.mark.parametrize('route', ['AB', 'a b', 'A,B', ' A, b '])
+def test_ordered_success(route):
+    node = make_node([1, 1], goals=route)
     assert node.run_mission()
     assert [call.args[0] for call in node.goToPose.call_args_list] == [
-        (1., 2., 0.), (3., 4., 0.)]
+        (*letter_pos_map['A'], 0.), (*letter_pos_map['B'], 0.)]
+
+
+@pytest.mark.parametrize('route', ['', ' , ', 'AZ', 'A->B', None, [1., 2., 0.]])
+def test_invalid_letters_stop_before_navigation(route):
+    node = make_node([], goals=route)
+    with pytest.raises(ValueError):
+        node.run_mission()
+    node.waitUntilNav2Active.assert_not_called()
+    node.goToPose.assert_not_called()
+
+
+def test_repeated_letters_preserve_order():
+    node = make_node([1, 1, 1], goals='AXA')
+    assert node.run_mission()
+    assert [call.args[0] for call in node.goToPose.call_args_list] == [
+        (*letter_pos_map[letter], 0.) for letter in 'AXA']
 
 
 def test_failure_stops_remaining_goals():
