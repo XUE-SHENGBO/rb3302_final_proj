@@ -1,0 +1,25 @@
+# ROS map coordinates; default is F, facing left in the assignment drawing.
+initial_pose:
+  x: -1.2777215
+  y: -0.0858072
+  yaw: 0.0
+# Simulation odometry is ideal. Do not use the physical robot's high odometry
+# uncertainty, which spreads AMCL particles across neighbouring maze cells.
+localization:
+  odometry_alpha: 0.01
+  initial_position_stddev: 0.02
+  initial_yaw_stddev: 0.03
+robot:
+  length: 0.18
+  width: 0.17
+  laser_x: -0.052
+  laser_height: 0.09
+  laser_yaw: 3.141592653589793
+  command_timeout: 0.8
+scan:
+  rate_hz: 8.0
+  count: 360
+  min_range: 0.15
+  max_range: 8.0
+window:
+  scale: 150

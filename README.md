@@ -21,6 +21,12 @@ Implemented behavior:
 
 `planning_rpp` combines A* planning and regulated pure pursuit. Initial transform waiting is 24 hours. Progress checking allows 30 seconds for 0.1 m of translation; angular acceleration limits are 3.2 rad/s². Collision checking remains enabled.
 
+The current maze controller uses a 0.25 m lookahead (configured limits 0.15–0.4 m) and rechecks XY during final heading alignment (`goal_checker.stateful=false`). Both laser observation sources explicitly accept heights 0–2 m. Physical AMCL alpha1–alpha5 remain 0.8.
+
+Local simulation uses `./start_sim.sh` and `./sim_mission.sh`, an independent window, domain **86**, and localhost discovery. Its ideal-odometry AMCL noise and initial covariance are generated from `simulator/config.yaml` into `simulator/log/nav2_sim_params.yaml`. That generated file must never replace the physical navigation configuration or be passed to the robot launcher. Do not transfer build/install/log directories between machines.
+
+Before physical tests, check and synchronize the PC/robot clocks while ROS is stopped, restart hardware and navigation, set the real pose in RViz, and verify local obstacle marking plus runtime parameters. Then test a controlled 0.10 m/s single-target run before the normal four-target routes. See sections 1 and 12 of the Chinese guide for the complete commands, recording steps, expected values, and stopping procedure.
+
 Rebuild the changed packages after sourcing ROS and the robot workspace:
 
 ```bash

@@ -316,13 +316,19 @@ class MissionManager(BasicNavigator):
             self._check_deadline()
             self._stop_pub.publish(Twist())
             pose = self._current_pose()
-            inside = (pose is not None and math.hypot(pose[0] - target[0], pose[1] - target[1])
-                      <= self.p('arrival_tolerance'))
+            distance = (math.hypot(pose[0] - target[0], pose[1] - target[1])
+                        if pose is not None else None)
+            inside = distance is not None and distance <= self.p('arrival_tolerance')
+            stationary = self._stationary()
             now = time.monotonic()
-            if window.update(now, inside and self._stationary()):
+            if window.update(now, inside and stationary):
                 return
             if now >= expires:
-                raise GoalFailed('Could not verify position and uninterrupted stationary dwell')
+                position = (f'{distance:.3f}m (limit {self.p("arrival_tolerance"):.3f}m)'
+                            if distance is not None else 'unavailable/stale TF')
+                raise GoalFailed(
+                    'Could not verify position and uninterrupted stationary dwell: '
+                    f'position_error={position}, stationary={stationary}')
             self._spin()
 
     def run_mission(self):

@@ -40,13 +40,15 @@ controller_server:
       plugin: nav2_controller::SimpleGoalChecker
       xy_goal_tolerance: 0.06
       yaw_goal_tolerance: 0.20
-      stateful: true
+      # Recheck XY while aligning yaw; AMCL corrections can move the estimate.
+      stateful: false
     FollowPath:
       plugin: nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
       desired_linear_vel: 0.3
-      lookahead_dist: 0.6
-      min_lookahead_dist: 0.3
-      max_lookahead_dist: 0.9
+      # The maze cells are about 0.6 m; a full-cell lookahead cuts corners.
+      lookahead_dist: 0.25
+      min_lookahead_dist: 0.15
+      max_lookahead_dist: 0.4
       lookahead_time: 1.5
       rotate_to_heading_angular_vel: 0.5
       transform_tolerance: 0.1
@@ -76,7 +78,9 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      footprint: "[[-0.12, -0.09], [0.08, -0.09], [0.08, 0.09], [-0.12, 0.09]]"
+      # Measured body 0.18 x 0.17 m; include margin for base_link offset.
+      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"
+      footprint_padding: 0.01
       plugins: ["obstacle_layer", "inflation_layer"]
       obstacle_layer:
         plugin: nav2_costmap_2d::ObstacleLayer
@@ -84,6 +88,8 @@ local_costmap:
         scan:
           topic: /scan
           data_type: LaserScan
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
           clearing: true
           marking: true
       inflation_layer:
@@ -99,7 +105,9 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_link
       resolution: 0.05
-      footprint: "[[-0.12, -0.09], [0.08, -0.09], [0.08, 0.09], [-0.12, 0.09]]"
+      # Keep the planner and controller footprints consistent.
+      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"
+      footprint_padding: 0.01
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       static_layer:
@@ -111,6 +119,8 @@ global_costmap:
         scan:
           topic: /scan
           data_type: LaserScan
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
           clearing: true
           marking: true
       inflation_layer:
