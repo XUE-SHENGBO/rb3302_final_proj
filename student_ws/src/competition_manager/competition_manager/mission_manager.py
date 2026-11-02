@@ -17,6 +17,7 @@ from competition_manager.mission_rules import (
     read_checkpoint, StopWindow, write_checkpoint,
 )
 from geometry_msgs.msg import PoseStamped, Twist
+from lifecycle_msgs.srv import GetState
 from nav2_msgs.action import NavigateToPose
 from nav2_simple_commander.robot_navigator import BasicNavigator
 from nav_msgs.msg import Odometry
@@ -50,9 +51,9 @@ class MissionManager(BasicNavigator):
             'map_frame': 'map', 'base_frame': 'base_link', 'odom_topic': '/odom',
             'set_initial_pose': False, 'initial_letter': '', 'initial_heading': '',
             'start_automatically': False, 'validate_only': False,
-            'mission_timeout_sec': 180.0, 'goal_timeout_sec': 60.0,
+            'mission_timeout_sec': 600.0, 'goal_timeout_sec': 120.0,
             'dwell_sec': 3.0, 'arrival_timeout_sec': 15.0,
-            'arrival_tolerance': 0.08, 'stopped_linear_tolerance': 0.02,
+            'arrival_tolerance': 0.10, 'stopped_linear_tolerance': 0.02,
             'stopped_angular_tolerance': 0.05, 'telemetry_timeout_sec': 0.5,
             'tf_timeout_sec': 1.0, 'goal_heading_mode': 'approach',
             'fixed_goal_yaw': 0.0, 'max_retries': 1, 'failure_policy': 'stop',
@@ -106,6 +107,39 @@ class MissionManager(BasicNavigator):
             'mission': self._state,
         }, ensure_ascii=False)
         return response
+
+    def _waitForNodeToActivate(self, node_name):
+        """Retry lost lifecycle replies without limiting preparation time."""
+        service = f'{node_name}/get_state'
+        while True:
+            client = self.create_client(GetState, service)
+            try:
+                while not client.wait_for_service(timeout_sec=1.0):
+                    self._spin()
+                    self.get_logger().info(f'{service} service not available, waiting...')
+                future = client.call_async(GetState.Request())
+                response_deadline = time.monotonic() + 5.0
+                while not future.done() and time.monotonic() < response_deadline:
+                    self._spin()
+                if not future.done():
+                    client.remove_pending_request(future)
+                    future.cancel()
+                    self.get_logger().warning(
+                        f'{service} response timed out; retrying. Preparation remains waiting.')
+                    continue
+                try:
+                    response = future.result()
+                except Exception as error:
+                    self.get_logger().warning(f'{service} request failed: {error}; retrying.')
+                    response = None
+                if response is not None and response.current_state.label == 'active':
+                    self.get_logger().info(f'{node_name} is active.')
+                    return
+            finally:
+                self.destroy_client(client)
+            retry_at = time.monotonic() + 1.0
+            while time.monotonic() < retry_at:
+                self._spin()
 
     def _waitForInitialPose(self):
         """Preserve RViz localization unless numeric initialization was requested."""
@@ -257,7 +291,7 @@ class MissionManager(BasicNavigator):
             if self._cancel_requested:
                 handle.cancel_goal_async()
 
-    def _navigate(self, target):
+    def _navigate(self, target):# handle sending goal
         goal_deadline = min(self._deadline, time.monotonic() + self.p('goal_timeout_sec'))
         while not self.nav_to_pose_client.server_is_ready():
             self._spin()
@@ -266,9 +300,9 @@ class MissionManager(BasicNavigator):
         self._cancel_requested = False
         self.goal_handle = None
         self.result_future = None
-        goal = NavigateToPose.Goal()
-        goal.pose = self.make_pose(target)
-        self._send_future = self.nav_to_pose_client.send_goal_async(goal)
+        goal = NavigateToPose.Goal()#create a goal
+        goal.pose = self.make_pose(target)#load target
+        self._send_future = self.nav_to_pose_client.send_goal_async(goal)#send to action server
         self._send_future.add_done_callback(self._accept_goal)
         while not self._send_future.done() or self.goal_handle is None:
             self._spin()
@@ -334,6 +368,9 @@ class MissionManager(BasicNavigator):
     def run_mission(self):
         """Prepare, start explicitly, visit in order and retain recoverable results."""
         route, positions, initial = self._validate()
+        self.get_logger().info(
+            f'Mission limits: total={self.p("mission_timeout_sec"):.1f}s, '
+            f'per attempt={self.p("goal_timeout_sec"):.1f}s; timer starts after READY.')
         if self.p('validate_only'):
             self.get_logger().info(
                 f'Configuration valid: route={route}, landmarks={len(positions)}')
@@ -346,10 +383,13 @@ class MissionManager(BasicNavigator):
         while self._current_pose() is None or not self._stationary():
             self._spin()
         self._wait_for_start()
-        for index, visit in enumerate(self._state['visits']):
+#==============================================================================================================
+        for index, visit in enumerate(self._state['visits']):                                     # for each goal point
+            #index: the index of goal points from 0
+            #visit: dic:{'letter': 'A', 'status': 'pending'}
             if visit['status'] in ('completed', 'skipped'):
                 continue
-            for attempt in range(self.p('max_retries') + 1):
+            for attempt in range(self.p('max_retries') + 1):# retires
                 self._check_deadline()
                 current = self._current_pose()
                 if current is None:
@@ -363,12 +403,12 @@ class MissionManager(BasicNavigator):
                 self.get_logger().info(
                     f'Goal {index + 1}/{len(route)} {visit["letter"]}, attempt {attempt + 1}')
                 try:
-                    self._navigate(target)
+                    self._navigate(target)                                                         # send to navigation function on top and wait until the nav2 action returns a result
                     visit['status'] = 'dwelling'
                     self._record('dwelling')
                     self._dwell(target)
-                except GoalFailed as error:
-                    visit.update(status='failed', reason=str(error))
+                except GoalFailed as error:                                                        # catch error
+                    visit.update(status='failed', reason=str(error))# handle error
                     self.get_logger().warning(str(error))
                     if not self.stop_task():
                         raise RuntimeError('Cancellation unconfirmed; refusing another goal')
@@ -382,7 +422,8 @@ class MissionManager(BasicNavigator):
                         break
                     self._record('failed')
                     return False
-                else:
+                else:# marked as completed
+                    visit.pop('reason', None)
                     visit['status'] = 'completed'
                     self._record('running')
                     self.get_logger().info(
@@ -395,7 +436,7 @@ class MissionManager(BasicNavigator):
             ('All goals reached in order' if complete else 'Route ended with skipped goals')
             + f'; elapsed={self._state["elapsed_sec"]:.2f}s; result={self._result_path}')
         return complete
-
+#===================================================================================================================
 
 def main(args=None):
     """Run one mission per ROS domain and always cancel on abnormal termination."""

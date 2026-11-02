@@ -221,6 +221,57 @@ def test_stale_odometry_and_nonzero_motion_do_not_count(tmp_path, monkeypatch):
     assert not node._stationary()
 
 
+def test_lifecycle_lost_reply_retried_until_active(tmp_path, monkeypatch):
+    node, clock = make_node(tmp_path, monkeypatch)
+    lost = Mock()
+    lost.done.return_value = False
+    inactive = Mock()
+    inactive.done.return_value = True
+    inactive.result.return_value = SimpleNamespace(current_state=SimpleNamespace(label='inactive'))
+    active = Mock()
+    active.done.return_value = True
+    active.result.return_value = SimpleNamespace(current_state=SimpleNamespace(label='active'))
+    clients = []
+    for future in (lost, inactive, active):
+        client = Mock()
+        client.wait_for_service.return_value = True
+        client.call_async.return_value = future
+        clients.append(client)
+    node.create_client = Mock(side_effect=clients)
+    node.destroy_client = Mock()
+
+    node._waitForNodeToActivate('amcl')
+
+    assert clock.now >= 106.0
+    clients[0].remove_pending_request.assert_called_once_with(lost)
+    lost.cancel.assert_called_once()
+    assert node.destroy_client.call_count == 3
+    assert node._deadline is None
+    node._stop_pub.publish.assert_not_called()
+
+
+def test_four_goals_can_complete_after_180_seconds_in_extended_run(tmp_path, monkeypatch):
+    node, clock = make_node(tmp_path, monkeypatch, mission_timeout_sec=600.0)
+
+    def navigate(target):
+        clock.now += 55.0
+        node._current_pose = lambda: target
+
+    node._navigate = navigate
+    assert node.run_mission()
+    assert 220.0 < node._state['elapsed_sec'] < 600.0
+    assert all(v['status'] == 'completed' for v in node._state['visits'])
+
+
+def test_successful_retry_clears_previous_failure_reason(tmp_path, monkeypatch):
+    node, _ = make_node(tmp_path, monkeypatch)
+    node._navigate = Mock(side_effect=[runtime.GoalFailed('old timeout'), None, None, None, None])
+    node._dwell = lambda target: None
+    assert node.run_mission()
+    assert node._state['visits'][0]['attempt'] == 2
+    assert 'reason' not in node._state['visits'][0]
+
+
 def test_start_service_rejects_early_requests(tmp_path, monkeypatch):
     node, _ = make_node(tmp_path, monkeypatch)
     response = SimpleNamespace()
