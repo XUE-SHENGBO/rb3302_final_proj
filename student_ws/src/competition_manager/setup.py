@@ -25,7 +25,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'mission_manager = competition_manager.mission_manager:main'
+            'mission_manager = competition_manager.mission_manager:main',
+            'velocity_guard = competition_manager.velocity_guard:main'
         ],
     },
 )

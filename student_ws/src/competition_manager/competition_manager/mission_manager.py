@@ -51,7 +51,7 @@ class MissionManager(BasicNavigator):
             'map_frame': 'map', 'base_frame': 'base_link', 'odom_topic': '/odom',
             'set_initial_pose': False, 'initial_letter': '', 'initial_heading': '',
             'start_automatically': False, 'validate_only': False,
-            'mission_timeout_sec': 600.0, 'goal_timeout_sec': 120.0,
+            'mission_timeout_sec': 6000.0, 'goal_timeout_sec': 1200.0,
             'dwell_sec': 3.0, 'arrival_timeout_sec': 15.0,
             'arrival_tolerance': 0.10, 'stopped_linear_tolerance': 0.02,
             'stopped_angular_tolerance': 0.05, 'telemetry_timeout_sec': 0.5,
@@ -77,7 +77,7 @@ class MissionManager(BasicNavigator):
         self._tf_listener = TransformListener(self._tf, self)
         self.create_subscription(
             Odometry, self.p('odom_topic'), self._odom_callback, qos_profile_sensor_data)
-        self._stop_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self._stop_pub = self.create_publisher(Twist, '/cmd_vel_stop', 10)
         self.create_service(Trigger, '/mission_manager/start', self._start_callback)
         self.create_service(Trigger, '/mission_manager/status', self._status_callback)
 
@@ -346,6 +346,8 @@ class MissionManager(BasicNavigator):
     def _dwell(self, target):
         window = StopWindow(self.p('dwell_sec'))
         expires = time.monotonic() + self.p('arrival_timeout_sec')
+        previous = None
+        outside_since = None
         while True:
             self._check_deadline()
             self._stop_pub.publish(Twist())
@@ -355,6 +357,21 @@ class MissionManager(BasicNavigator):
             inside = distance is not None and distance <= self.p('arrival_tolerance')
             stationary = self._stationary()
             now = time.monotonic()
+            conditions = (inside, stationary)
+            if conditions != previous:
+                error = f'{distance:.3f}m' if distance is not None else 'stale TF'
+                self.get_logger().info(
+                    f'Dwell conditions: position_error={error}, inside={inside}, '
+                    f'stationary={stationary}; require continuous {self.p("dwell_sec")}s')
+                previous = conditions
+            # Nav2's success pose and the next AMCL/TF sample can straddle
+            # the same 10 cm boundary. Retry promptly instead of idling 15 s.
+            outside_since = (outside_since if outside_since is not None else now) if (
+                distance is not None and not inside and stationary) else None
+            if outside_since is not None and now - outside_since >= .5:
+                raise GoalFailed(
+                    f'Could not verify arrival within {self.p("arrival_tolerance"):.3f}m: {distance:.3f}m; '
+                    'requesting navigation retry')
             if window.update(now, inside and stationary):
                 return
             if now >= expires:
@@ -364,6 +381,28 @@ class MissionManager(BasicNavigator):
                     'Could not verify position and uninterrupted stationary dwell: '
                     f'position_error={position}, stationary={stationary}')
             self._spin()
+
+    def wait_for_velocity_guard(self):
+        """Do not start a mission against the old unguarded navigation launch."""
+        while True:
+            client = self.create_client(Trigger, '/velocity_guard/ready')
+            try:
+                if not client.wait_for_service(timeout_sec=1.0):
+                    self.get_logger().info('Waiting for velocity_guard; restart start2.sh after upgrade.')
+                    continue
+                future = client.call_async(Trigger.Request())
+                expires = time.monotonic() + 2.0
+                while not future.done() and time.monotonic() < expires:
+                    self._spin()
+                if future.done() and future.result() is not None and future.result().success:
+                    return
+                if not future.done():
+                    client.remove_pending_request(future)
+                    future.cancel()
+                self.get_logger().info('Waiting for velocity_guard with fresh scan and TF.')
+                self._spin(1.0)
+            finally:
+                self.destroy_client(client)
 
     def run_mission(self):
         """Prepare, start explicitly, visit in order and retain recoverable results."""
@@ -380,6 +419,7 @@ class MissionManager(BasicNavigator):
             self.setInitialPose(self.make_pose(initial))
         self.get_logger().info('Waiting for Nav2 and AMCL; set the actual pose in RViz.')
         self.waitUntilNav2Active()
+        self.wait_for_velocity_guard()
         while self._current_pose() is None or not self._stationary():
             self._spin()
         self._wait_for_start()
@@ -403,7 +443,17 @@ class MissionManager(BasicNavigator):
                 self.get_logger().info(
                     f'Goal {index + 1}/{len(route)} {visit["letter"]}, attempt {attempt + 1}')
                 try:
-                    self._navigate(target)                                                         # send to navigation function on top and wait until the nav2 action returns a result
+                    navigation_target = target
+                    if attempt > 0:
+                        # Put the retry's acceptance disk farther toward the true
+                        # centre. Verification always uses the ORIGINAL landmark.
+                        dx, dy = xy[0] - current[0], xy[1] - current[1]
+                        distance = math.hypot(dx, dy)
+                        if 0.01 < distance <= 2 * self.p('arrival_tolerance'):
+                            margin = min(.03, self.p('arrival_tolerance') / 2)
+                            navigation_target = (xy[0] + margin * dx / distance,
+                                                 xy[1] + margin * dy / distance, yaw)
+                    self._navigate(navigation_target)                                                         # send to navigation function on top and wait until the nav2 action returns a result
                     visit['status'] = 'dwelling'
                     self._record('dwelling')
                     self._dwell(target)

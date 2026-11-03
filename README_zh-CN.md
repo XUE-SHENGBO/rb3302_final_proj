@@ -82,7 +82,7 @@ cd ~/rb3302_xue/rb3302_final_proj_code
 1. 输入恰好四个 A–X 目标字母，例如 `BCDA` 或 `BABA`，按回车。不要额外添加起始格。
 2. 程序等待 Nav2、AMCL、有效坐标变换和静止里程计；默认保留 RViz 初始化，不会重置到原点。
 3. 出现 `READY: press Enter to START` 后，**再按一次回车**才开始运动和整轮计时。
-4. 每个目标在 Nav2 成功后，还需确认位置误差不超过 8 厘米、传感器数据新鲜，并连续静止至少 3 秒；最后一个目标也执行此检查。
+4. 每个目标在 Nav2 成功后，还需确认位置误差不超过 10 厘米、传感器数据新鲜，并连续静止至少 3 秒；最后一个目标也执行此检查。
 5. 整轮计时包含行驶、Nav2 恢复、应用层重试与停留。超时发送取消和零速度，停止后续目标。
 
 成功结束输出 `All goals reached in order` 和耗时。结果保存在机器人 `~/.ros/rb3302/last_mission.json`，包含每个目标的完成、失败、跳过状态。
@@ -165,7 +165,7 @@ colcon build --symlink-install --packages-select competition_manager planning_rp
 
 实车 AMCL 的 `alpha1`–`alpha5` 保留 **0.8**；模拟专用的 **0.01** 和较小初始协方差只由 `start_sim.sh` 写入模拟运行参数。不要把生成的 `simulator/log/nav2_sim_params.yaml` 复制到实车导航配置中，也不要向实车 `start2.sh` 注入这份文件。
 
-2026-11-02 的 A→S 实车录包经隔离域离线重放后，实车 AMCL 配置增加了 `update_min_d/a=0.05`、`max_beams=100` 及更明确的雷达似然参数；数据和比较方法见项目外层的 [`offline_amcl/report.md`](../reports/real-test-20261102/AS-20261102-0740/offline_amcl/report.md)。后续按实测调整请求，两端导航 YAML 已同步为 `xy_goal_tolerance=0.10`、两张代价地图 `inflation_radius=0.30`、`feedback=CLOSED_LOOP` 和 RPP `transform_tolerance=0.2`；任务层 `arrival_tolerance` 同步为 0.10 m。AMCL 离线结果不代表这些后续改动已经过实车验证。导航 YAML 原文件备份于 `~/rb3302_xue/backups/20261102-nav-remaining-091142/nav2_params.before.yaml`；重新启动导航并设置实际位姿后，新值才生效。
+2026-11-02 的 A→S 实车录包经隔离域离线重放后，实车 AMCL 配置增加了 `update_min_d/a=0.05`、`max_beams=100` 及更明确的雷达似然参数；数据和比较方法见项目外层的 [`offline_amcl/report.md`](../reports/real-test-20261102/AS-20261102-0740/offline_amcl/report.md)。后续按实测调整请求，两端导航 YAML 已同步为 `xy_goal_tolerance=0.10`、两张代价地图 `inflation_radius=0.30`、`feedback=OPEN_LOOP`（本次停车修复后） 和 RPP `transform_tolerance=0.2`；任务层 `arrival_tolerance` 同步为 0.10 m。AMCL 离线结果不代表这些后续改动已经过实车验证。导航 YAML 原文件备份于 `~/rb3302_xue/backups/20261102-nav-remaining-091142/nav2_params.before.yaml`；重新启动导航并设置实际位姿后，新值才生效。
 
 首次复制使用电脑端命令；不复制跨机器编译产物，不删除机器人现有文件：
 
@@ -270,7 +270,11 @@ ros2 run nav2_map_server map_saver_cli -f ~/rb3302_xue/maps/rb3302_map_new
 | `start_automatically` | `false` | 默认必须回车或服务明确开始 |
 | `validate_only` | `false` | 为 true 时只验证配置，不发送目标 |
 
-Nav2 的位置容差为 6 厘米、朝向容差为 0.20 弧度；`goal_checker.stateful=false`，最终转向期间也重新检查位置。任务层仍检查 8 厘米误差和连续静止 3 秒。RPP 固定前瞻距离为 **0.25 米**，配置范围 0.15–0.4 米，以减少约 0.6 米迷宫走廊的拐角切弯。当前进展检查为 30 秒内平移至少 0.1 米，RPP 与速度平滑器角加速度上限为 3.2 rad/s²。RPP 期望平移速度为 0.3 米/秒，碰撞检测保持启用。
+Nav2 与任务管理器的位置容差统一为 **0.10 m**，每点（含最后一点）必须在容差内连续静止 **3 秒**；移动、定位越界或数据失效会重新计时，日志会输出 `Dwell conditions`。字母任务不要求终点朝向，因此不再为终点额外转向；路径起始方向相差超过约 45° 时仍可原地对齐。RPP 期望速度 **0.20 m/s**，固定前瞻 **0.25 m**，末段减速范围 **0.25 m**、最低接近速度 **0.05 m/s**；曲率调速半径 **0.40 m**、最低调速速度 **0.07 m/s**，原地目标转速 **0.80 rad/s**。局部、全局膨胀半径均为 **0.30 m**。
+
+导航输出链路为 `/cmd_vel_nav_raw → velocity_smoother → /cmd_vel_smoothed → velocity_guard → /cmd_vel`；恢复动作也经过该链路。平滑器使用 **OPEN_LOOP**，AMCL/EKF 定位反馈仍保留。速度守卫将最终输出限制在请求速度以内及 ±0.20 m/s、±1.0 rad/s，零速请求和 `/cmd_vel_stop` 直接触发停车；指令超过 0.30 秒或扫描超过 0.50 秒未更新、扫描 TF 无效时停车。守卫用雷达端点检查未来 0.8 秒内约 24×23 cm 的车体扫掠区域。它依赖雷达覆盖与实际制动能力，不能替代实物急停。碰撞恢复保留障碍地图，停车等待 1 秒后最多重试两次，不再通过清空障碍立即恢复运动。
+
+不要在导航运行时另开遥控节点直接发布 `/cmd_vel`；正常导航时此话题应只有 `velocity_guard` 一个发布者。
 
 局部和全局 `obstacle_layer.scan` 的高度范围均显式设置为 **0.0–2.0 米**。车体实测约 18×17 厘米；配置矩形为 22×21 厘米，外加每侧 1 厘米 padding，发布轮廓约 24×23 厘米。当前仍需确认 `base_link` 相对实际外缘的偏置及所有外凸部件。URDF 中的底盘外形仍为旧标称尺寸，验收轮廓以实物测量为准，不能直接用 RViz 的 RobotModel 外观替代测量。
 
@@ -330,7 +334,7 @@ source ~/rb3302_xue/rb3302_final_proj_code/student_ws/install/setup.bash
 
 模拟运行在本机 **ROS_DOMAIN_ID=86**，使用 LOCALHOST 发现，与机器人使用的域 6 隔离。它使用 `simulator/maps/rb3302_map.yaml` 和配套图像重建迷宫，通过窗口显示墙体、A–X 格、激光点、车体与车头方向；不需要 RViz。
 
-要求电脑安装 ROS 2 Jazzy、Nav2、robot_localization、colcon，以及系统 Python 的 `rclpy`、`yaml`、`PIL` 和 `tkinter`。首次启动自动在 `simulator/` 下独立构建导航和任务包，不使用机器人的编译产物。
+要求电脑安装 ROS 2 Jazzy、Nav2、robot_localization、colcon，以及系统 Python 的 `rclpy`、`yaml`、`PIL` 和 `tkinter`。每次启动在 `simulator/` 下增量构建导航、速度守卫和任务包，不使用机器人的编译产物。
 
 在本地电脑的两个终端分别执行：
 
@@ -354,7 +358,7 @@ cd /media/lfzyzl/WinShare/Project/rb3302/rb3302_final_proj_code
 
 `/sim/ground_truth` 额外提供模拟车在 map 坐标中的真实位置，方便与 `/amcl_pose` 对照；它不是实体小车话题。修正模拟定位噪声及迷宫前瞻距离后，无界面回归中 `EKNA` 与 `CJKL` 四点均第一次尝试完成，分别耗时约 97 秒、113 秒。模拟结果会随定位和控制器状态变化，不能把某次结果当作实车结论。
 
-模拟定位参数单独位于 `simulator/config.yaml` 的 `localization`：默认使用理想里程计对应的较小 AMCL 运动噪声（alpha=0.01），初始位置标准差 2 cm、角度标准差 0.03 rad；这些值只写入 `simulator/log/nav2_sim_params.yaml`，不会修改实车 AMCL 参数。共享 RPP 配置使用 0.25 m 前瞻距离，以减少 0.6 m 迷宫转角切弯；goal checker 在最终转向期间仍重新检查位置。
+模拟定位参数单独位于 `simulator/config.yaml` 的 `localization`：默认使用理想里程计对应的较小 AMCL 运动噪声（alpha=0.01），初始位置标准差 2 cm、角度标准差 0.03 rad；这些值只写入 `simulator/log/nav2_sim_params.yaml`，不会修改实车 AMCL 参数。共享 RPP 配置使用 0.25 m 前瞻与 0.25 m 终点减速范围；位置容差统一 10 cm，不要求终点朝向，每点连续静止 3 秒。模拟只覆盖 AMCL 的理想里程噪声与初始化协方差，停车链路与实车相同。
 
 模拟器每 0.5 秒把真值、地图定位、位置误差、指令速度、实际速度与几何接触状态写入 `simulator/log/ros/sim_trace_<PID>.jsonl`。任务到达复核失败时，日志会输出位置误差和是否静止。图形或扫描计算造成延迟时，运动模型按完整时间间隔分小步积分，并按实际完成运动发布里程计，避免丢失积分时间。关闭模拟窗口会终止专用进程组里的导航节点，释放实例锁。
 
@@ -377,6 +381,10 @@ done
 ros2 param get /amcl alpha1
 ros2 param get /controller_server FollowPath.lookahead_dist
 ros2 param get /controller_server goal_checker.stateful
+ros2 param get /controller_server goal_checker.xy_goal_tolerance
+ros2 param get /velocity_smoother feedback
+ros2 node info /velocity_guard
+ros2 topic info /cmd_vel --verbose
 ros2 param get /controller_server FollowPath.use_collision_detection
 ros2 param get /local_costmap/local_costmap obstacle_layer.scan.max_obstacle_height
 ros2 param get /global_costmap/global_costmap obstacle_layer.scan.max_obstacle_height
@@ -398,7 +406,7 @@ export ROS_DOMAIN_ID=6 ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
 unset ROS_LOCALHOST_ONLY ROS_STATIC_PEERS
 mkdir -p "$HOME/.ros/rb3302/bags"
 ros2 bag record -o "$HOME/.ros/rb3302/bags/test-$(date +%Y%m%d-%H%M%S)" \
-  /scan /tf /tf_static /odom /amcl_pose /cmd_vel_nav_raw /cmd_vel /plan \
+  /scan /tf /tf_static /odom /odom/raw /amcl_pose /cmd_vel_nav_raw /cmd_vel_smoothed /cmd_vel_stop /cmd_vel /plan \
   /local_costmap/costmap /local_costmap/published_footprint
 ```
 
@@ -424,3 +432,25 @@ cd ~/rb3302_xue/rb3302_final_proj_code
 ### 本地模拟回归
 
 本地关闭旧模拟窗口后重新执行第 11 节的两个脚本。每条路线都从配置中的 F 初始位姿重新启动，分别输入 `EKNA`、`CJKL`；检查四点均完成、每点停留达标以及结果文件 `~/.ros/rb3302/sim_last_mission.json`。模拟使用域 86，轨迹在本地 `simulator/log/ros/`；实车使用域 6 和单独的结果文件，两者不要混为一轮测试。
+
+
+### 本次更新后的部署与复测
+
+更新源码后必须重新构建新增的速度守卫入口，并关闭旧的导航进程后再重启。仅重新进入原 tmux 会话不会加载新链路。机器人终端执行：
+
+```bash
+cd ~/rb3302_xue/rb3302_final_proj_code/student_ws
+source /opt/ros/jazzy/setup.bash
+colcon build --symlink-install --packages-select competition_manager planning_rpp
+```
+
+先在导航终端 B 按 Ctrl+C 结束旧导航，再从项目目录执行 `./start2.sh`。保留正常运行的硬件终端 A。用 RViz 重新设置实际位姿，核对上文生命周期与参数检查：XY 为 0.10、平滑器为 OPEN_LOOP，`/cmd_vel` 发布者仅为 velocity_guard。守卫打印 `command_timeout` 在尚未发目标时属于正常停车状态；发目标后应变为 `clear`。出现 `scan_unavailable` 先检查扫描与 TF，不能通过关闭守卫继续运行。
+
+本地执行 `./start_sim.sh`，另开终端执行 `./sim_mission.sh`。分别从 F 初始位置重新启动后测试 CJKL、EKNA，确认四点完成、每点静止至少 3 秒、轨迹没有几何接触。模拟域 86 与实车域 6 保持隔离。实车先按上文单目标低速流程复测，再运行四目标；同步文件不会自动发送目标或启动运动。
+
+到点边界修正：Nav2 成功后若新定位持续在 10 cm 圈外且车体静止，0.5 秒后进入导航重试，不再空等 15 秒。若重试时已在原目标 20 cm 内，导航精修目标沿当前位置到原目标的方向延伸最多 3 cm；记录和静止验收仍使用原始字母坐标及 10 cm 容差，不能把圈外位置计为完成。
+
+
+本次本地回归（2026-11-03）：固定同一份配置、分别从 F 初始位姿运行，CJKL 完成约 71.2 秒（C、L 边界精修重试），EKNA 完成约 72.3 秒（E 边界精修重试）。每点均按原始坐标、10 cm 容差验证连续静止至少 3 秒。两轮采样轨迹没有几何接触，最大最终指令 0.20 m/s、0.80 rad/s。52 项任务、守卫、ROS 动作集成与模拟运动回归通过；另在域 87 验证异常反馈限速、零速、停车请求、障碍、扫描丢失和指令丢失。模拟耗时只作软件验证，不能作为实机性能保证。
+
+升级后的任务在 READY 前还会等待 `/velocity_guard/ready` 确认雷达和 TF 新鲜；等待没有总准备超时。若一直提示重启 start2，表示仍在运行旧导航链路，请先按上述步骤重启终端 B。

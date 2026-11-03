@@ -19,10 +19,8 @@ flock -n 9 || { echo '模拟器已运行，请先关闭已有实例。' >&2; exi
 set +u
 source /opt/ros/jazzy/setup.bash
 set -u
-if [[ ! -f "$CODE/simulator/install/competition_manager/share/ament_index/resource_index/packages/competition_manager" ]]; then
-  echo '首次启动：构建本地导航和任务包...'
-  (cd "$CODE/student_ws" && colcon --log-base "$CODE/simulator/log" build --symlink-install --build-base "$CODE/simulator/build" --install-base "$CODE/simulator/install" --packages-select planning_rpp competition_manager)
-fi
+echo '增量构建本地导航、速度守卫和任务包...'
+(cd "$CODE/student_ws" && colcon --log-base "$CODE/simulator/log" build --symlink-install --build-base "$CODE/simulator/build" --install-base "$CODE/simulator/install" --packages-select planning_rpp competition_manager)
 set +u
 source "$CODE/simulator/install/setup.bash"
 set -u

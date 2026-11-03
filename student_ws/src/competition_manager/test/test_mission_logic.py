@@ -122,6 +122,7 @@ def make_node(tmp_path, monkeypatch, **overrides):
     node._current_pose = lambda: (0., 0., 0.)
     node._stationary = lambda: True
     node.waitUntilNav2Active = Mock()
+    node.wait_for_velocity_guard = Mock()
     node._validate = lambda: ('BABA', POSITIONS, None)
     node.stop_task = Mock(return_value=True)
 
@@ -203,10 +204,12 @@ def test_unconfirmed_cancel_prevents_retry_or_skip(tmp_path, monkeypatch):
 
 
 def test_dwell_refuses_outside_position_even_if_stationary(tmp_path, monkeypatch):
-    node, _ = make_node(tmp_path, monkeypatch, arrival_timeout_sec=3.1)
+    node, clock = make_node(tmp_path, monkeypatch, arrival_timeout_sec=15.)
     node._deadline = 280.
+    started = clock.now
     with pytest.raises(runtime.GoalFailed, match='verify'):
         node._dwell((2., 2., 0.))
+    assert .5 <= clock.now - started < 1.0
 
 
 def test_stale_odometry_and_nonzero_motion_do_not_count(tmp_path, monkeypatch):
@@ -345,3 +348,24 @@ def test_explicit_pose_keeps_parent_initialization(tmp_path, monkeypatch):
     monkeypatch.setattr(runtime.BasicNavigator, '_waitForInitialPose', parent)
     node._waitForInitialPose()
     parent.assert_called_once()
+
+
+def test_boundary_retry_keeps_original_landmark_for_verification(tmp_path, monkeypatch):
+    node, clock = make_node(tmp_path, monkeypatch, arrival_tolerance=.10)
+    sent = []
+
+    def move(target):
+        sent.append(target)
+        # Simulate a post-success localization correction just outside 10 cm.
+        if len(sent) == 1:
+            node._current_pose = lambda: (target[0] + .101, target[1], target[2])
+        else:
+            node._current_pose = lambda: target
+    node._navigate = move
+    assert node.run_mission()
+    assert len(sent) == 5
+    assert abs(sent[1][0] - (POSITIONS['B'][0] - .03)) < 1e-9
+    result = json.loads(Path(node._result_path).read_text())
+    assert result['visits'][0]['target'][:2] == list(POSITIONS['B'])
+    assert all(v['status'] == 'completed' for v in result['visits'])
+    assert clock.now >= 100 + 4 * 3 + .5

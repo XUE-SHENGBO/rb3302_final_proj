@@ -190,8 +190,14 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=[
                 ('cmd_vel', 'cmd_vel_nav_raw'),
-                ('cmd_vel_smoothed', cmd_vel_topic),
+                ('cmd_vel_smoothed', '/cmd_vel_smoothed'),
             ],
+        ),
+        Node(
+            package='competition_manager', executable='velocity_guard',
+            name='velocity_guard', output='screen',
+            parameters=[{'base_frame': base_frame}],
+            remappings=[('cmd_vel', cmd_vel_topic), ('/scan', scan_topic)],
         ),
         Node(
             package='nav2_smoother',
@@ -206,14 +212,15 @@ def generate_launch_description():
             name='behavior_server',
             output='screen',
             parameters=[configured_params],
-            remappings=[('cmd_vel', cmd_vel_topic)],
+            remappings=[('cmd_vel', '/cmd_vel_nav_raw')],
         ),
         Node(
             package='nav2_bt_navigator',
             executable='bt_navigator',
             name='bt_navigator',
             output='screen',
-            parameters=[configured_params],
+            parameters=[configured_params, {'default_nav_to_pose_bt_xml':
+                PathJoinSubstitution([share, 'config', 'navigate_safe.xml'])}],
             remappings=[('odom', odom_topic)],
         ),
         Node(

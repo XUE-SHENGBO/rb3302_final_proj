@@ -18,6 +18,7 @@ from rclpy.action import ActionServer, CancelResponse, GoalResponse  # noqa: E40
 from rclpy.callback_groups import ReentrantCallbackGroup  # noqa: E402
 from rclpy.executors import MultiThreadedExecutor  # noqa: E402
 from rclpy.node import Node  # noqa: E402
+from std_srvs.srv import Trigger
 from tf2_ros import TransformBroadcaster  # noqa: E402
 
 
@@ -30,6 +31,7 @@ class FakeNavigation(Node):
 
     def __init__(self, block=False, delay=0):
         super().__init__('fake_navigation')
+        self.create_service(Trigger, '/velocity_guard/ready', self.guard_ready)
         self.position = [0., 0., 0., 1.]
         self.block, self.delay = block, delay
         self.visits = []
@@ -39,11 +41,16 @@ class FakeNavigation(Node):
         self.tf = TransformBroadcaster(self)
         self.odom = self.create_publisher(Odometry, '/odom', 10)
         self.create_timer(.02, self.publish_pose, callback_group=group)
-        self.create_subscription(Twist, '/cmd_vel', self.velocity, 10, callback_group=group)
+        self.create_subscription(Twist, '/cmd_vel_stop', self.velocity, 10, callback_group=group)
         self.server = ActionServer(
             self, NavigateToPose, 'navigate_to_pose', execute_callback=self.execute,
             goal_callback=self.accept, cancel_callback=lambda _: CancelResponse.ACCEPT,
             callback_group=group)
+
+    def guard_ready(self, request, response):
+        del request
+        response.success = True
+        return response
 
     def accept(self, request):
         """Optionally delay acceptance beyond the mission deadline."""
