@@ -1,5 +1,8 @@
-# 忽略整个 robot_ws
-/robot_ws/
+# Track driver repairs while keeping workspace products and unrelated additions ignored.
+/robot_ws/*
+!/robot_ws/src/
+/robot_ws/src/*
+!/robot_ws/src/waverover_base/
 
 # student_ws 只保留 src 中的 competition_manager
 /student_ws/*
@@ -12,4 +15,5 @@ build/
 install/
 log/
 __pycache__/
+.pytest_cache/
 *.pyc
