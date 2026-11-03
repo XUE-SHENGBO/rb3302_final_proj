@@ -13,7 +13,7 @@ source "$CODE/robot_ws/install/setup.bash"
 source "$CODE/student_ws/install/setup.bash"
 args=()
 mission_limit=600.0
-goal_limit=120.0
+goal_limit=180.0
 case "${1:-}" in
   --resume)
     args=(-p "resume_file:=$HOME/.ros/rb3302/last_mission.json")
@@ -28,8 +28,8 @@ case "${1:-}" in
     ;;
   ''|--competition)
     if [[ "${1:-}" == --competition ]]; then
-      mission_limit=180.0
-      goal_limit=60.0
+      mission_limit=600.0
+      goal_limit=180.0
     fi
     read -r -p '请输入四个目标字母（例如 BCDA，可重复）：' ROUTE
     ROUTE="${ROUTE^^}"

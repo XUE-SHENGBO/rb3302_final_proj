@@ -56,7 +56,7 @@ class MissionManager(BasicNavigator):
             'arrival_tolerance': 0.10, 'stopped_linear_tolerance': 0.02,
             'stopped_angular_tolerance': 0.05, 'telemetry_timeout_sec': 0.5,
             'tf_timeout_sec': 1.0, 'goal_heading_mode': 'approach',
-            'fixed_goal_yaw': 0.0, 'max_retries': 1, 'failure_policy': 'stop',
+            'fixed_goal_yaw': 0.0, 'max_retries': 10, 'failure_policy': 'stop',
             'resume_file': '',
             'result_file': str(Path.home() / '.ros/rb3302/last_mission.json'),
         }
