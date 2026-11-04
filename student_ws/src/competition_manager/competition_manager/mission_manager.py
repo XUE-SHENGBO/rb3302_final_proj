@@ -56,7 +56,7 @@ class MissionManager(BasicNavigator):
             'arrival_tolerance': 0.10, 'stopped_linear_tolerance': 0.02,
             'stopped_angular_tolerance': 0.05, 'telemetry_timeout_sec': 0.5,
             'tf_timeout_sec': 1.0, 'goal_heading_mode': 'approach',
-            'fixed_goal_yaw': 0.0, 'max_retries': 10, 'failure_policy': 'stop',
+            'fixed_goal_yaw': 0.0, 'max_retries': 5, 'failure_policy': 'stop',
             'resume_file': '',
             'result_file': str(Path.home() / '.ros/rb3302/last_mission.json'),
         }
@@ -319,8 +319,13 @@ class MissionManager(BasicNavigator):
         self._check_deadline()
         self._task_active = False
         result = self.result_future.result()
+        details = (f'status={result.status}, '
+                   f'error_code={getattr(result.result, "error_code", "unavailable")}, '
+                   f'error_msg={getattr(result.result, "error_msg", "unavailable")!r}, '
+                   f'target={target}, current_pose={self._current_pose()}')
+        self.get_logger().info('Nav2 result: ' + details)
         if result.status != GoalStatus.STATUS_SUCCEEDED:
-            raise GoalFailed(f'Nav2 goal failed with status {result.status}')
+            raise GoalFailed('Nav2 goal failed: ' + details)
 
     def stop_task(self):
         """Cancel owned actions and publish zeros while waiting for termination."""
@@ -453,7 +458,7 @@ class MissionManager(BasicNavigator):
                             margin = min(.03, self.p('arrival_tolerance') / 2)
                             navigation_target = (xy[0] + margin * dx / distance,
                                                  xy[1] + margin * dy / distance, yaw)
-                    self._navigate(navigation_target)                                                         # send to navigation function on top and wait until the nav2 action returns a result
+                    self._navigate(navigation_target) # send to navigation function on top and wait until the nav2 action returns a result
                     visit['status'] = 'dwelling'
                     self._record('dwelling')
                     self._dwell(target)

@@ -1,0 +1,205 @@
+amcl:  # 自适应蒙特卡洛定位节点，利用地图、激光和里程计估计机器人位姿
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    base_frame_id: base_link  # 机器人底盘坐标系名称
+    odom_frame_id: odom  # 里程计坐标系名称
+    global_frame_id: map  # 定位使用的全局地图坐标系名称
+    scan_topic: scan  # 定位使用的激光扫描话题，相对名称受节点命名空间影响
+    robot_model_type: nav2_amcl::DifferentialMotionModel  # 里程计运动模型插件；此处使用差速底盘模型
+    alpha1: 0.8  # 旋转运动引起的旋转里程计噪声系数，越大表示不确定性越高
+    alpha2: 0.8  # 平移运动引起的旋转里程计噪声系数
+    alpha3: 0.8  # 平移运动引起的平移里程计噪声系数
+    alpha4: 0.8  # 旋转运动引起的平移里程计噪声系数
+    alpha5: 0.8  # 全向运动模型的平移相关噪声系数；当前差速模型不使用此项
+    # A→S 实车录包离线重放：更频繁地用雷达修正里程漂移，保留原运动噪声参数。
+    update_min_d: 0.05  # 累计平移至少 5 cm 时更新粒子滤波；原 Jazzy 默认值为 25 cm
+    update_min_a: 0.05 # 累计转角至少 0.05 rad 时更新；原 Jazzy 默认值为 0.2 rad
+    laser_model_type: likelihood_field  # 显式使用本次重放验证的似然场扫描模型
+    max_beams: 100  # 每次滤波最多使用 100 条均匀采样的雷达束；默认 60 条
+    sigma_hit: 0.10  # 地图墙体与雷达端点匹配的高斯标准差，单位 m；默认 0.20 m
+    z_hit: 0.80  # 匹配墙体的观测权重；与 z_rand 之和为 1
+    z_rand: 0.20  # 杂散测量权重
+    laser_likelihood_max_dist: 0.50  # 似然场中墙体距离截断，单位 m；默认 2.0 m
+
+bt_navigator:  # 行为树导航节点，协调规划、控制和恢复行为
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    global_frame: map  # 全局参考坐标系；map 用于地图导航，odom 用于局部连续运动
+    robot_base_frame: base_link  # 机器人底盘坐标系名称，用于查询机器人位姿和轮廓变换
+    odom_topic: /odom  # 里程计话题，提供机器人速度等信息
+    navigators: ["navigate_to_pose", "navigate_through_poses"]  # 启用的导航任务插件名称列表
+    navigate_to_pose:  # 导航到单个目标位姿的插件配置
+      plugin: nav2_bt_navigator::NavigateToPoseNavigator  # 插件实现类：单目标位姿导航器
+    navigate_through_poses:  # 按顺序经过多个目标位姿的插件配置
+      plugin: nav2_bt_navigator::NavigateThroughPosesNavigator  # 插件实现类：多目标位姿导航器
+
+controller_server:  # 控制器服务节点，根据路径计算底盘速度指令
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    controller_frequency: 20.0  # 控制器计算并输出速度指令的频率，单位 Hz
+    progress_checker_plugins: ["progress_checker"]  # 导航进展检查器的插件名称列表
+    goal_checker_plugins: ["goal_checker"]  # 目标到达检查器的插件名称列表
+    controller_plugins: ["FollowPath"]  # 路径跟踪控制器的插件名称列表
+    progress_checker:  # 导航进展检查器配置，用于判断机器人是否长时间未移动
+      plugin: nav2_controller::SimpleProgressChecker  # 插件实现类：基于位移与时间的进展检查器
+      # 场地较小，允许机器人先原地对齐朝向，再开始平移。
+      required_movement_radius: 0.10  # 判定取得移动进展所需的最小位移，单位 m
+      movement_time_allowance: 30.0  # 允许未达到上述最小位移的最长时间，单位 s
+    goal_checker:  # 目标到达检查器配置
+      plugin: nav2_controller::SimpleGoalChecker  # 插件实现类：基于位置与朝向误差的目标检查器
+      xy_goal_tolerance: 0.10  # 目标位置允许的平面距离误差，单位 m
+      yaw_goal_tolerance: 6.283185307179586  # 目标朝向允许的偏航角误差，单位 rad
+      # 调整朝向时继续检查位置误差，因为 AMCL 修正可能改变估计位置。
+      stateful: false  # 是否在位置达标后锁定位置检查结果；false 表示调整朝向时仍复查位置
+    FollowPath:  # 路径跟踪控制器实例配置，名称对应 controller_plugins 中的条目
+      plugin: nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController  # 插件实现类：带速度调节的纯追踪控制器（RPP）
+      desired_linear_vel: 0.2  # 期望前进线速度，实际速度会受减速规则和限制影响，单位 m/s
+      # 迷宫单元格约为 0.6 m；前视距离若达到一整格，容易在转角处切弯。
+      lookahead_dist: 0.10  # 固定前视距离，未启用速度自适应前视时使用，单位 m
+      min_lookahead_dist: 0.15  # 速度自适应前视距离的下限，仅启用对应开关时生效，单位 m
+      max_lookahead_dist: 0.4  # 速度自适应前视距离的上限，仅启用对应开关时生效，单位 m
+      lookahead_time: 1.5  # 速度自适应前视的时间尺度，前视距离由速度乘此值计算，单位 s
+      rotate_to_heading_angular_vel: 10.0  # 原地旋转以对齐路径或目标朝向时的目标角速度，单位 rad/s
+      transform_tolerance: 0.2  # TF 坐标变换的时间容差，单位 s
+      use_velocity_scaled_lookahead_dist: false  # 是否按当前速度自适应调整前视距离；false 使用固定前视距离
+      min_approach_linear_velocity: 0.05  # 接近路径终点减速时保留的最低线速度，单位 m/s
+      approach_velocity_scaling_dist: 0.25  # 接近路径终点时开始缩放线速度的剩余路径距离，单位 m
+      use_collision_detection: true  # 是否沿预测运动轨迹进行碰撞检测
+      max_allowed_time_to_collision_up_to_carrot: 1.0  # 碰撞预测的最大时间范围，且预测不超过前视目标点，单位 s
+      use_regulated_linear_velocity_scaling: true  # 是否根据路径曲率调低线速度，使急弯处减速
+      use_cost_regulated_linear_velocity_scaling: false  # 是否根据障碍物代价调低线速度，使靠近障碍物时减速
+      regulated_linear_scaling_min_radius: 0.4  # 曲率减速的转弯半径阈值，半径小于此值时触发减速，单位 m
+      regulated_linear_scaling_min_speed: 0.07  # 曲率或代价调速时的最低线速度；终点减速仍可进一步降低速度，单位 m/s
+      allow_reversing: false  # 是否允许沿路径中的倒车段反向行驶；不应与原地朝向对齐同时启用
+      use_rotate_to_heading: true  # 是否允许原地旋转以对齐路径起始方向或最终目标朝向
+      rotate_to_heading_min_angle: 0.785  # 触发路径方向原地对齐的最小朝向偏差，单位 rad，0.785 约为 45°
+      max_angular_accel: 3.2  # 原地朝向对齐时的最大角加速度，单位 rad/s²
+
+local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟踪
+  local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟踪
+    ros__parameters:  # ROS 2 节点参数配置区
+      # 最多等待 24 小时，以便建立初始 TF 或手动初始化 AMCL 定位。
+      initial_transform_timeout: 86400.0  # 初始化时等待全局参考系与底盘之间 TF 变换的最长时间，单位 s
+      use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+      global_frame: odom  # 全局参考坐标系；map 用于地图导航，odom 用于局部连续运动
+      robot_base_frame: base_link  # 机器人底盘坐标系名称，用于查询机器人位姿和轮廓变换
+      rolling_window: true  # 是否让代价地图窗口随机器人移动
+      width: 3  # 代价地图窗口宽度，单位 m
+      height: 3  # 代价地图窗口高度，单位 m
+      resolution: 0.05  # 代价地图栅格分辨率，即每个栅格边长，单位 m
+      # 实测车体约为 0.18 × 0.17 m；轮廓中预留了 base_link 偏移余量。
+      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 底盘坐标系下的机器人多边形轮廓，按顺序列出各顶点 [x, y]，单位 m
+      footprint_padding: 0.01  # 在机器人轮廓外额外增加的安全余量，单位 m
+      plugins: ["obstacle_layer", "inflation_layer"]  # 按加载顺序列出的代价地图图层插件名称
+      obstacle_layer:  # 障碍物图层配置，利用传感器观测标记和清除障碍
+        plugin: nav2_costmap_2d::ObstacleLayer  # 插件实现类：传感器障碍物图层
+        observation_sources: scan  # 障碍物观测源名称列表，多个名称使用空格分隔
+        scan:  # 名为 scan 的激光观测源配置
+          topic: /scan  # 该观测源订阅的话题；/scan 为绝对话题名
+          data_type: LaserScan  # 观测消息类型；LaserScan 表示二维激光扫描
+          min_obstacle_height: 0.0  # 纳入障碍物观测的最低高度，单位 m
+          max_obstacle_height: 2.0  # 纳入障碍物观测的最高高度，单位 m
+          clearing: true  # 是否沿传感器射线清除已观测为空闲的区域中的障碍标记
+          marking: true  # 是否将有效观测点标记为障碍物
+      inflation_layer:  # 膨胀图层配置，在障碍物周围生成逐渐衰减的代价区域
+        plugin: nav2_costmap_2d::InflationLayer  # 插件实现类：障碍物膨胀图层
+        enabled: true             # 启用膨胀图层
+        inflation_radius: 0.30    # 障碍物周围的代价膨胀范围，单位 m
+        cost_scaling_factor: 10.0 # 代价随距离增大而衰减的速度
+      always_send_full_costmap: true  # 是否每次发布完整代价地图；true 不使用增量更新方式
+
+global_costmap:  # 全局代价地图配置，用于全局路径规划
+  global_costmap:  # 全局代价地图配置，用于全局路径规划
+    ros__parameters:  # ROS 2 节点参数配置区
+      # 最多等待 24 小时，以便建立初始 TF 或手动初始化 AMCL 定位。
+      initial_transform_timeout: 86400.0  # 初始化时等待全局参考系与底盘之间 TF 变换的最长时间，单位 s
+      use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+      global_frame: map  # 全局参考坐标系；map 用于地图导航，odom 用于局部连续运动
+      robot_base_frame: base_link  # 机器人底盘坐标系名称，用于查询机器人位姿和轮廓变换
+      resolution: 0.05  # 代价地图栅格分辨率，即每个栅格边长，单位 m
+      # 全局规划与局部控制使用相同的机器人轮廓。
+      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 底盘坐标系下的机器人多边形轮廓，按顺序列出各顶点 [x, y]，单位 m
+      footprint_padding: 0.01  # 在机器人轮廓外额外增加的安全余量，单位 m
+      track_unknown_space: true  # 是否保留未知区域标记；true 表示区分未知区域与已知空闲区域
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]  # 按加载顺序列出的代价地图图层插件名称
+      static_layer:  # 静态地图图层配置，将地图服务器提供的地图加入代价地图
+        plugin: nav2_costmap_2d::StaticLayer  # 插件实现类：静态地图图层
+        map_subscribe_transient_local: true  # 是否以瞬态本地持久性订阅地图，使后加入的订阅者也能收到已发布地图
+      obstacle_layer:  # 障碍物图层配置，利用传感器观测标记和清除障碍
+        plugin: nav2_costmap_2d::ObstacleLayer  # 插件实现类：传感器障碍物图层
+        observation_sources: scan  # 障碍物观测源名称列表，多个名称使用空格分隔
+        scan:  # 名为 scan 的激光观测源配置
+          topic: /scan  # 该观测源订阅的话题；/scan 为绝对话题名
+          data_type: LaserScan  # 观测消息类型；LaserScan 表示二维激光扫描
+          min_obstacle_height: 0.0  # 纳入障碍物观测的最低高度，单位 m
+          max_obstacle_height: 2.0  # 纳入障碍物观测的最高高度，单位 m
+          clearing: true  # 是否沿传感器射线清除已观测为空闲的区域中的障碍标记
+          marking: true  # 是否将有效观测点标记为障碍物
+      inflation_layer:  # 膨胀图层配置，在障碍物周围生成逐渐衰减的代价区域
+        plugin: nav2_costmap_2d::InflationLayer  # 插件实现类：障碍物膨胀图层
+        enabled: true             # 启用膨胀图层
+        inflation_radius: 0.30    # 障碍物周围的代价膨胀范围，单位 m
+        cost_scaling_factor: 2.0 # 代价随距离增大而衰减的速度
+      always_send_full_costmap: true  # 是否每次发布完整代价地图；true 不使用增量更新方式
+
+map_server:  # 地图服务器节点，加载并发布静态地图
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    yaml_filename: ""  # 地图描述 YAML 文件路径；空字符串通常由启动文件传入具体路径
+
+planner_server:  # 全局规划服务节点，计算从当前位置到目标的路径
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    planner_plugins: ["GridBased"]  # 全局路径规划器插件名称列表
+    GridBased:  # 名为 GridBased 的全局规划器实例配置
+      plugin: nav2_navfn_planner::NavfnPlanner  # 插件实现类：基于栅格势场的 NavFn 规划器
+      tolerance: 0.05  # 规划终点容差，小于任务验收容差
+      use_astar: true  # 是否使用 A* 搜索；true 使用 A*，false 使用 Dijkstra 搜索
+
+smoother_server:  # 路径平滑服务节点，对规划路径进行平滑处理
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    smoother_plugins: ["simple_smoother"]  # 路径平滑器插件名称列表
+    simple_smoother:  # 简单路径平滑器实例配置
+      plugin: nav2_smoother::SimpleSmoother  # 插件实现类：简单路径平滑器
+
+behavior_server:  # 行为服务节点，提供旋转、倒退、定向行驶和等待等动作
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    local_costmap_topic: local_costmap/costmap_raw  # 行为插件使用的局部原始代价地图话题
+    global_costmap_topic: global_costmap/costmap_raw  # 行为插件使用的全局原始代价地图话题
+    local_footprint_topic: local_costmap/published_footprint  # 局部代价地图发布的机器人轮廓话题
+    global_footprint_topic: global_costmap/published_footprint  # 全局代价地图发布的机器人轮廓话题
+    behavior_plugins: ["spin", "backup", "drive_on_heading", "wait"]  # 启用的行为插件名称列表
+    spin:  # 原地旋转行为配置
+      plugin: nav2_behaviors::Spin  # 插件实现类：原地旋转
+    backup:  # 倒退行为配置
+      plugin: nav2_behaviors::BackUp  # 插件实现类：倒退
+    drive_on_heading:  # 沿指定方向直线行驶的行为配置
+      plugin: nav2_behaviors::DriveOnHeading  # 插件实现类：沿指定方向行驶
+    wait:  # 等待行为配置
+      plugin: nav2_behaviors::Wait  # 插件实现类：等待
+    local_frame: odom  # 局部运动参考坐标系，使用连续的 odom 坐标系
+    global_frame: map  # 全局参考坐标系；map 用于地图导航，odom 用于局部连续运动
+    robot_base_frame: base_link  # 机器人底盘坐标系名称，用于查询机器人位姿和轮廓变换
+
+velocity_smoother:  # 速度平滑节点，限制速度及加减速度以减少底盘运动突变
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    smoothing_frequency: 20.0  # 速度平滑及输出频率，单位 Hz
+    feedback: OPEN_LOOP  # 速度反馈模式；OPEN_LOOP 使用上次输出速度，CLOSED_LOOP 使用里程计速度
+    max_velocity: [0.2, 0.0, 1.0]  # 速度上限，依次为 [x 线速度、y 线速度、偏航角速度]，单位 [m/s, m/s, rad/s]
+    min_velocity: [-0.2, 0.0, -1.0]  # 速度下限，分量顺序同 max_velocity；负值允许对应方向反向运动
+    max_accel: [0.5, 0.0, 3.2]  # 各轴加速度上限，依次对应 [x、y、偏航]，单位 [m/s², m/s², rad/s²]
+    max_decel: [-0.5, 0.0, -3.2]  # 各轴减速度限制，按负值填写，分量顺序和单位同 max_accel
+    odom_topic: /odom  # 里程计话题，提供机器人速度等信息
+    enable_stamped_cmd_vel: false  # 是否使用带时间戳的 TwistStamped 速度消息；false 使用 Twist
+
+waypoint_follower:  # 航点跟随节点，依次导航到多个航点并执行航点任务
+  ros__parameters:  # ROS 2 节点参数配置区
+    use_sim_time: false  # 是否使用 /clock 仿真时间；false 表示使用系统时间
+    loop_rate: 20  # 检查航点导航任务执行状态的循环频率，单位 Hz
+    stop_on_failure: false  # 某个航点导航失败时是否停止整个任务；false 表示继续尝试后续航点
+    waypoint_task_executor_plugin: wait_at_waypoint  # 到达航点后执行的任务插件实例名称
+    wait_at_waypoint:  # 到达航点后的等待任务配置，等待时长采用该插件默认值
+      plugin: nav2_waypoint_follower::WaitAtWaypoint  # 插件实现类：到达航点后等待

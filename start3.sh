@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 # Run from any directory. A prepared mission waits for Enter before moving.
-set -e
+set -eE
+# Keep output in the current terminal and report why the launcher stopped.
+report_exit() {
+  local status=$?
+  local reason
+  case "$status" in
+    0) reason="正常结束" ;;
+    129) reason="终端挂断（SIGHUP）" ;;
+    130) reason="用户中断（Ctrl+C / SIGINT）" ;;
+    137) reason="进程被强制终止（SIGKILL），请检查系统日志" ;;
+    143) reason="收到终止信号（SIGTERM）" ;;
+    *) reason="执行失败，请查看上方报错" ;;
+  esac
+  printf '\n[%s] %s；退出码：%s\n' "${BASH_SOURCE[0]##*/}" "$reason" "$status" >&2
+}
+trap report_exit EXIT
+trap 'printf "\n[%s] 命令失败（退出码 %s），%s:%s\n  %s\n" "${0##*/}" "$?" "${BASH_SOURCE[0]}" "$LINENO" "$BASH_COMMAND" >&2' ERR
 CODE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-# Reattach to the existing session instead of starting duplicate nodes.
-if [[ -z "${TMUX:-}" && -t 0 ]] && command -v tmux >/dev/null 2>&1; then
-  exec tmux new-session -A -s rb3302-mission bash "$CODE/start3.sh" "$@"
-fi
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=6 ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
 unset ROS_LOCALHOST_ONLY
@@ -40,4 +52,4 @@ case "${1:-}" in
 esac
 echo "本轮总时限 ${mission_limit} 秒；单次导航 ${goal_limit} 秒；READY 后明确开始才计时。"
 args+=(-p "mission_timeout_sec:=$mission_limit" -p "goal_timeout_sec:=$goal_limit")
-exec ros2 run competition_manager mission_manager --ros-args "${args[@]}"
+ros2 run competition_manager mission_manager --ros-args "${args[@]}"

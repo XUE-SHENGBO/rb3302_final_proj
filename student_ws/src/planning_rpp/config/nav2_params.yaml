@@ -55,11 +55,11 @@ controller_server:  # 控制器服务节点，根据路径计算底盘速度指�
       plugin: nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController  # 插件实现类：带速度调节的纯追踪控制器（RPP）
       desired_linear_vel: 0.2  # 期望前进线速度，实际速度会受减速规则和限制影响，单位 m/s
       # 迷宫单元格约为 0.6 m；前视距离若达到一整格，容易在转角处切弯。
-      lookahead_dist: 0.25  # 固定前视距离，未启用速度自适应前视时使用，单位 m
+      lookahead_dist: 0.15  # 固定前视距离，未启用速度自适应前视时使用，单位 m
       min_lookahead_dist: 0.15  # 速度自适应前视距离的下限，仅启用对应开关时生效，单位 m
       max_lookahead_dist: 0.4  # 速度自适应前视距离的上限，仅启用对应开关时生效，单位 m
       lookahead_time: 1.5  # 速度自适应前视的时间尺度，前视距离由速度乘此值计算，单位 s
-      rotate_to_heading_angular_vel: 0.8  # 原地旋转以对齐路径或目标朝向时的目标角速度，单位 rad/s
+      rotate_to_heading_angular_vel: 5.0  # 原地旋转以对齐路径或目标朝向时的目标角速度，单位 rad/s
       transform_tolerance: 0.2  # TF 坐标变换的时间容差，单位 s
       use_velocity_scaled_lookahead_dist: false  # 是否按当前速度自适应调整前视距离；false 使用固定前视距离
       min_approach_linear_velocity: 0.05  # 接近路径终点减速时保留的最低线速度，单位 m/s
@@ -90,7 +90,13 @@ local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟�
       # 实测车体约为 0.18 × 0.17 m；轮廓中预留了 base_link 偏移余量。
       footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 底盘坐标系下的机器人多边形轮廓，按顺序列出各顶点 [x, y]，单位 m
       footprint_padding: 0.01  # 在机器人轮廓外额外增加的安全余量，单位 m
-      plugins: ["obstacle_layer", "inflation_layer"]  # 按加载顺序列出的代价地图图层插件名称
+      # 保留静态墙体；控制失败后允许重建局部传感器观测，移除历史残留。
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      publish_frequency: 5.0  # 与默认5Hz更新频率一致，便于诊断恢复过程
+      static_layer:
+        plugin: nav2_costmap_2d::StaticLayer
+        map_subscribe_transient_local: true
+        subscribe_to_updates: false
       obstacle_layer:  # 障碍物图层配置，利用传感器观测标记和清除障碍
         plugin: nav2_costmap_2d::ObstacleLayer  # 插件实现类：传感器障碍物图层
         observation_sources: scan  # 障碍物观测源名称列表，多个名称使用空格分隔

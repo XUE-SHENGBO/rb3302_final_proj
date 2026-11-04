@@ -26,6 +26,29 @@ pytestmark = pytest.mark.skipif(
     os.environ.get('RB3302_ROS_INTEGRATION') != '1', reason='Isolated ROS integration is opt-in')
 
 
+def test_default_parameters_validate_without_navigation(tmp_path, monkeypatch):
+    """Exercise declared defaults, which mission-logic fixtures override."""
+    assert os.environ.get('ROS_DOMAIN_ID') == '217'
+    assert os.environ.get('ROS_AUTOMATIC_DISCOVERY_RANGE') == 'LOCALHOST'
+    package = Path(__file__).parents[1]
+    monkeypatch.setattr(runtime, 'get_package_share_directory', lambda _: str(package))
+    rclpy.init(args=[
+        '--ros-args', '-p', 'goals:=\"BABA\"', '-p', 'validate_only:=true',
+        '-p', f'result_file:={tmp_path / "result.json"}',
+    ])
+    node = None
+    try:
+        node = runtime.MissionManager()
+        assert node.run_mission()
+        assert node._deadline is None
+        assert not node._task_active
+        assert not (tmp_path / 'result.json').exists()
+    finally:
+        if node is not None:
+            node.destroy_node()
+        rclpy.shutdown()
+
+
 class FakeNavigation(Node):
     """Publish synthetic pose/odometry and implement only the navigation action."""
 

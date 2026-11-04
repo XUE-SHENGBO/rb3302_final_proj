@@ -2,7 +2,9 @@
 
 See [the Chinese operating guide](README_zh-CN.md) for the copy-and-paste procedure for robot `ubuntu@192.168.50.6`, project `~/rb3302_xue/rb3302_final_proj_code`, ROS 2 Jazzy, domain **6**.
 
-Run `./start1.sh` for hardware, `./start2.sh` for localization/navigation, and `./start3.sh` for a mission. Interactive launches automatically use separate tmux sessions when available. Re-running a launcher reattaches to its session. Detaching or closing SSH does not stop the robot; use Ctrl+C in mission, navigation, then hardware order.
+Run `./start1.sh` for hardware, `./start2.sh` for localization/navigation, and `./start3.sh` for a mission. `start2.sh` and `start3.sh` run in the current terminal and print errors and an exit summary when they stop. Keep their SSH terminals open; repeated launches start new processes. `start1.sh` still uses tmux when available. Use Ctrl+C in mission, navigation, then hardware order.
+
+`./start2.sh` now uses the validated local refresh configuration: a 0.15 m lookahead, static/obstacle/inflation layers in the local costmap, 5 Hz map publication, and controller recovery that clears the local costmap then waits one second. Diagnostics are recorded automatically. `bash scripts/start2_local_refresh.sh` remains a compatibility alias. Pre-promotion files are under `backups/start2-before-local-refresh-20261104/`; restore them to their original paths before rebuilding if a rollback is needed.
 
 Set the actual pose with RViz's **2D Pose Estimate**. Enter exactly four target letters, then press Enter again after the mission reports READY. Preparation does not consume the new mission's time budget.
 
@@ -21,7 +23,7 @@ Implemented behavior:
 
 `planning_rpp` combines A* planning and regulated pure pursuit. Initial transform waiting is 24 hours. Progress checking allows 30 seconds for 0.1 m of translation; angular acceleration limits are 3.2 rad/s². Collision checking remains enabled.
 
-The current maze controller uses a 0.25 m lookahead (configured limits 0.15–0.4 m) and rechecks XY during final heading alignment (`goal_checker.stateful=false`). Both laser observation sources explicitly accept heights 0–2 m. Physical AMCL alpha1–alpha5 remain 0.8.
+The current maze controller uses a 0.15 m lookahead (configured limits 0.15–0.4 m) and rechecks XY during final heading alignment (`goal_checker.stateful=false`). Both laser observation sources explicitly accept heights 0–2 m. Physical AMCL alpha1–alpha5 remain 0.8.
 
 Local simulation uses `./start_sim.sh` and `./sim_mission.sh`, an independent window, domain **86**, and localhost discovery. Its ideal-odometry AMCL noise and initial covariance are generated from `simulator/config.yaml` into `simulator/log/nav2_sim_params.yaml`. That generated file must never replace the physical navigation configuration or be passed to the robot launcher. Do not transfer build/install/log directories between machines.
 

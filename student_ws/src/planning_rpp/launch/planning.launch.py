@@ -14,6 +14,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     map_yaml_file = LaunchConfiguration('map')
     params_file = LaunchConfiguration('params_file')
+    bt_xml = LaunchConfiguration('bt_xml')
     rviz = LaunchConfiguration('rviz')
     rviz_config = LaunchConfiguration('rviz_config')
     autostart = LaunchConfiguration('autostart')
@@ -64,6 +65,8 @@ def generate_launch_description():
             'params_file',
             default_value=PathJoinSubstitution(
                 [share, 'config', 'nav2_params.yaml'])),
+        DeclareLaunchArgument('bt_xml', default_value=PathJoinSubstitution(
+            [share, 'config', 'navigate_refresh_local.xml'])),
         DeclareLaunchArgument('rviz', default_value='true'),
         DeclareLaunchArgument(
             'rviz_config',
@@ -220,7 +223,7 @@ def generate_launch_description():
             name='bt_navigator',
             output='screen',
             parameters=[configured_params, {'default_nav_to_pose_bt_xml':
-                PathJoinSubstitution([share, 'config', 'navigate_safe.xml'])}],
+                bt_xml}],
             remappings=[('odom', odom_topic)],
         ),
         Node(
