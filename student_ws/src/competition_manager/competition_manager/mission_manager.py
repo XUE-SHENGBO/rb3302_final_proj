@@ -57,6 +57,7 @@ class MissionManager(BasicNavigator):
             'stopped_angular_tolerance': 0.05, 'telemetry_timeout_sec': 0.5,
             'tf_timeout_sec': 1.0, 'goal_heading_mode': 'approach',
             'fixed_goal_yaw': 0.0, 'max_retries': 5, 'failure_policy': 'stop',
+            'retry_delay_sec': 1.0,
             'resume_file': '',
             'result_file': str(Path.home() / '.ros/rb3302/last_mission.json'),
         }
@@ -198,7 +199,8 @@ class MissionManager(BasicNavigator):
     def _validate(self):
         for name in ('mission_timeout_sec', 'goal_timeout_sec', 'arrival_timeout_sec',
                      'arrival_tolerance', 'stopped_linear_tolerance',
-                     'stopped_angular_tolerance', 'telemetry_timeout_sec', 'tf_timeout_sec'):
+                     'stopped_angular_tolerance', 'telemetry_timeout_sec', 'tf_timeout_sec',
+                     'retry_delay_sec'):
             positive(self.p(name), name)
         positive(self.p('dwell_sec'), 'dwell_sec', minimum=3.0)
         if self.p('arrival_timeout_sec') < self.p('dwell_sec'):
@@ -348,6 +350,17 @@ class MissionManager(BasicNavigator):
             self._spin(check_deadline=False)
         return not self._task_active and self._send_future is None
 
+    def _wait_before_retry(self):
+        """Stay stopped while processing telemetry; charge waiting to the round."""
+        delay = self.p('retry_delay_sec')
+        self.get_logger().info(f'Navigation retry: staying stopped for {delay:.1f}s')
+        until = time.monotonic() + delay
+        while time.monotonic() < until:
+            self._check_deadline()
+            self._stop_pub.publish(Twist())
+            self._spin()
+        self._check_deadline()
+
     def _dwell(self, target):
         window = StopWindow(self.p('dwell_sec'))
         expires = time.monotonic() + self.p('arrival_timeout_sec')
@@ -470,6 +483,7 @@ class MissionManager(BasicNavigator):
                     self._check_deadline()
                     self._record('running')
                     if attempt < self.p('max_retries'):
+                        self._wait_before_retry()
                         continue
                     if self.p('failure_policy') == 'skip':
                         visit['status'] = 'skipped'

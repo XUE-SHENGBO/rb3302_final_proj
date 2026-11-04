@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.8)
+project(nav_recovery_test)
+find_package(ament_cmake REQUIRED)
+find_package(nav2_behavior_tree REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(nav2_msgs REQUIRED)
+add_executable(check check.cpp)
+ament_target_dependencies(check nav2_behavior_tree rclcpp_action nav2_msgs)

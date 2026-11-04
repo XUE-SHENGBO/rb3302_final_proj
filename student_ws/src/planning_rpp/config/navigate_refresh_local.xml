@@ -3,7 +3,16 @@
     <RecoveryNode number_of_retries="2" name="NavigateWithLocalRefresh">
       <PipelineSequence name="NavigateWithReplanning">
         <RateController hz="1.0">
-          <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased" error_code_id="{compute_path_error_code}"/>
+          <!-- Retry planning only after refreshing observations. StaticLayer
+               is not clearable; new scans can mark real obstacles again. -->
+          <RecoveryNode number_of_retries="2" name="PlanWithGlobalRefresh">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased" error_code_id="{compute_path_error_code}"/>
+            <Sequence name="RefreshGlobalObservations">
+              <WouldAPlannerRecoveryHelp error_code="{compute_path_error_code}"/>
+              <ClearEntireCostmap name="RefreshGlobalCostmap" service_name="global_costmap/clear_entirely_global_costmap"/>
+              <Wait wait_duration="1.0"/>
+            </Sequence>
+          </RecoveryNode>
         </RateController>
         <FollowPath path="{path}" controller_id="FollowPath" goal_checker_id="goal_checker" error_code_id="{follow_path_error_code}"/>
       </PipelineSequence>

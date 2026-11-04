@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Default: validated local static map and controller-triggered local refresh.
+# Default: saved static map with planner/global and controller/local recovery.
 set -eE
 # Keep output in the current terminal and report why the launcher stopped.
 report_exit() {
@@ -51,7 +51,7 @@ for topic in /scan /imu_data_ros /odom/raw; do
     exit 1
   fi
 done
-echo "默认导航：前视0.15m；局部静态墙体与障碍观测；控制失败后刷新局部地图并等待1秒。"
+echo "默认导航：前视0.15m；保留静态墙体与实时避障；规划失败刷新全局地图，控制失败刷新局部地图，均等待1秒。"
 params_args=()
 if [[ -n "${RB3302_NAV_PARAMS_FILE:-}" ]]; then
   [[ -f "$RB3302_NAV_PARAMS_FILE" ]] || { echo "参数文件不存在：$RB3302_NAV_PARAMS_FILE" >&2; exit 1; }

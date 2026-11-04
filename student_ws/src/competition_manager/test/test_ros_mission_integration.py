@@ -57,6 +57,7 @@ class FakeNavigation(Node):
         self.create_service(Trigger, '/velocity_guard/ready', self.guard_ready)
         self.position = [0., 0., 0., 1.]
         self.block, self.delay = block, delay
+        self.accept_release = threading.Event()
         self.visits = []
         self.cancellations = 0
         self.zeros = 0
@@ -78,7 +79,11 @@ class FakeNavigation(Node):
     def accept(self, request):
         """Optionally delay acceptance beyond the mission deadline."""
         del request
-        time.sleep(self.delay)
+        if self.delay:
+            # Release only after the mission expires, rather than racing wall-clock
+            # sleep against the bounded cancellation timeout on a busy test host.
+            if not self.accept_release.wait(timeout=10):
+                return GoalResponse.REJECT
         return GoalResponse.ACCEPT
 
     def velocity(self, msg):
@@ -146,11 +151,14 @@ def test_real_action_lifecycle_and_stop(tmp_path, monkeypatch, mode):
         else:
             with pytest.raises(runtime.MissionExpired):
                 node.run_mission()
+        if mode == 'late_accept':
+            fake.accept_release.set()
         assert node.stop_task()
         assert fake.zeros > 0
         if mode in ('action_timeout', 'late_accept'):
             assert fake.cancellations == 1
     finally:
+        fake.accept_release.set()
         node.stop_task()
         node.destroy_node()
         executor.shutdown(timeout_sec=3)

@@ -93,6 +93,7 @@ def make_node(tmp_path, monkeypatch, **overrides):
         'stopped_angular_tolerance': .05, 'max_retries': 1,
         'failure_policy': 'stop', 'goal_heading_mode': 'approach',
         'fixed_goal_yaw': 0., 'validate_only': False, 'start_automatically': False,
+        'retry_delay_sec': 1.0,
     }
     values.update(overrides)
     node.p = lambda name: values[name]
@@ -183,6 +184,33 @@ def test_failed_goal_stops_after_bounded_retries(tmp_path, monkeypatch):
     assert node._navigate.call_count == 2
     assert node._state['status'] == 'failed'
     assert node._state['visits'][1]['status'] == 'pending'
+
+
+def test_instant_failures_wait_stopped_between_attempts(tmp_path, monkeypatch):
+    node, clock = make_node(tmp_path, monkeypatch, max_retries=5)
+    attempts = []
+
+    def fail(target):
+        attempts.append(clock.now)
+        raise runtime.GoalFailed('NO_VALID_PATH')
+
+    node._navigate = fail
+    assert not node.run_mission()
+    assert len(attempts) == 6
+    assert all(b - a >= 1.0 for a, b in zip(attempts, attempts[1:]))
+    assert clock.now - attempts[-1] < .01  # No extra wait after exhausting retries.
+    for call in node._stop_pub.publish.call_args_list:
+        msg = call.args[0]
+        assert msg.linear.x == msg.linear.y == msg.angular.z == 0.0
+
+
+def test_retry_wait_cannot_outlive_mission_deadline(tmp_path, monkeypatch):
+    node, clock = make_node(tmp_path, monkeypatch, mission_timeout_sec=.4)
+    node._navigate = Mock(side_effect=runtime.GoalFailed('NO_VALID_PATH'))
+    with pytest.raises(runtime.MissionExpired):
+        node.run_mission()
+    assert node._navigate.call_count == 1
+    assert clock.now < 100.5
 
 
 def test_skipped_goal_is_reported_partial_not_success(tmp_path, monkeypatch):
