@@ -34,6 +34,7 @@ assert os.environ.get('ROS_AUTOMATIC_DISCOVERY_RANGE') == 'LOCALHOST'
 parser = argparse.ArgumentParser()
 parser.add_argument('bag', type=Path)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--hold-ready-seconds', type=float, default=0.)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(root/'student_ws/src/competition_manager'))
@@ -121,8 +122,25 @@ try:
         node._spin()
     before = node._loc_pose[1] if node._loc_pose else None
     refined = node.ensure_localization(force=True)
+    waited = None
+    if args.hold_ready_seconds > 0:
+        # Exercise actual production READY handling with a stationary AMCL that
+        # publishes only when explicitly updated. No navigation goal is sent.
+        node._state = {'started_at_unix': None, 'status': 'preparing', 'visits': []}
+        node._result_path = str(work/'ready-test-checkpoint.json')
+        start = time.monotonic()
+        trigger = threading.Timer(args.hold_ready_seconds, node._start_requested.set)
+        trigger.start()
+        try:
+            node._wait_for_start()
+        finally:
+            trigger.cancel()
+            trigger.join(timeout=1)
+        waited = time.monotonic()-start
+        assert waited >= args.hold_ready_seconds and node._deadline is not None
     after = node._loc_pose[1]
     report = {'refined': refined, 'quality': node._localization_quality(), 'logs': str(work),
+              'ready_wait_seconds': waited,
               'before_covariance': [before.pose.covariance[i] for i in (0,7,35)] if before else None,
               'after_covariance': [after.pose.covariance[i] for i in (0,7,35)],
               'after_pose': [after.pose.pose.position.x, after.pose.pose.position.y]}

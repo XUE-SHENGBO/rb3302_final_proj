@@ -28,7 +28,7 @@ from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_sensor_data
 from rclpy.signals import SignalHandlerOptions
 from rclpy.time import Time
-from std_srvs.srv import Trigger
+from std_srvs.srv import Empty, Trigger
 from tf2_ros import Buffer, TransformException, TransformListener
 
 
@@ -272,12 +272,23 @@ class MissionManager(LocalizationGuard, BasicNavigator):
             threading.Thread(target=read_start, daemon=True).start()
         if self.p('start_automatically'):
             self._start_requested.set()
+        next_observation = time.monotonic()
+        observation_interval = min(self.p('localization_update_interval_sec'),
+                                   self.p('localization_pose_timeout_sec')/2)
         while not self._start_requested.is_set():
+            if time.monotonic() >= next_observation and self._stationary():
+                # AMCL normally stops publishing poses when odometry is still.
+                # Keep observations fresh without resetting verification history
+                # or clearing maps for a healthy, unchanged stationary estimate.
+                self._localization_service(Empty, '/request_nomotion_update',
+                                           time.monotonic()+0.5)
+                next_observation = time.monotonic()+observation_interval
             self._spin()
             if not self._localization_quality()[0]:
                 self._ready = False
                 self.recover_localization()
                 self._ready = True
+                next_observation = time.monotonic()
         self._ready = False
         self.recover_localization()
         if self._current_pose() is None or not self._stationary():

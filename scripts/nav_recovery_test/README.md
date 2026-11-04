@@ -33,8 +33,11 @@ For the recorded KNHX session, freeze its stationary scans and odometry before t
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=217 ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 python3 scripts/nav_recovery_test/amcl_replay.py /path/to/20261104-080115/bag/bag_0.db3 --output /tmp/amcl-replay.json
+python3 scripts/nav_recovery_test/amcl_replay.py /path/to/20261104-080115/bag/bag_0.db3 --hold-ready-seconds 8 --output /tmp/amcl-ready-wait.json
 python3 -m pytest -q student_ws/src/competition_manager/test/test_localization_guard.py
 RB3302_ROS_INTEGRATION=1 python3 -m pytest -q student_ws/src/competition_manager/test/test_ros_mission_integration.py
 ```
 
 The replay intentionally uses a frozen physical pose and repeated real stationary frames, not a closed-loop robot trajectory. It verifies refinement of a broad initial particle distribution, not the physical KNHX route or every ambiguous map position. An unchanged or incorrectly initialized pose can still fail the bounded gate; the operator must then set the measured pose. Package runtime dependencies remain unchanged.
+
+The hold-ready case tests actual AMCL's stationary publication behavior beyond the two-second pose-age limit, then triggers START without sending a navigation goal. No synthetic costmap services are started: an unexpected full recovery/map clear during healthy waiting therefore fails this regression. It covers manual preparation waiting rather than only automatic-start paths.

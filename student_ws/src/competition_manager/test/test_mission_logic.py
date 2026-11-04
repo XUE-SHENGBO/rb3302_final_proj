@@ -87,6 +87,7 @@ def test_dwell_cannot_be_shortened_below_three_seconds(duration):
 def make_node(tmp_path, monkeypatch, **overrides):
     node = runtime.MissionManager.__new__(runtime.MissionManager)
     values = {
+        **runtime.LOCALIZATION_DEFAULTS,
         'dwell_sec': 3.0, 'arrival_timeout_sec': 15.0, 'arrival_tolerance': .08,
         'mission_timeout_sec': 180.0, 'goal_timeout_sec': 60.0,
         'telemetry_timeout_sec': .5, 'stopped_linear_tolerance': .02,
@@ -127,6 +128,7 @@ def make_node(tmp_path, monkeypatch, **overrides):
     node.ensure_localization = Mock()
     node.recover_localization = Mock()
     node._localization_quality = Mock(return_value=(True, 'verified'))
+    node._localization_service = Mock(return_value=True)
     node._validate = lambda: ('BABA', POSITIONS, None)
     node.stop_task = Mock(return_value=True)
 
@@ -229,6 +231,33 @@ def test_failed_reconvergence_prevents_another_goal_even_with_skip(tmp_path, mon
     node.stop_task.assert_called_once()
     assert node._navigate.call_count == 1
     assert node._state['visits'][1]['status'] == 'pending'
+
+
+@pytest.mark.parametrize('update_interval', [.5, 5.])
+def test_ready_wait_keeps_stationary_amcl_fresh_without_repeated_recovery(tmp_path, monkeypatch,
+                                                                        update_interval):
+    node, clock = make_node(tmp_path, monkeypatch,
+                            localization_update_interval_sec=update_interval)
+    del node._wait_for_start
+    monkeypatch.setattr(runtime.sys, 'stdin', SimpleNamespace(isatty=lambda: False))
+    last_observation = SimpleNamespace(at=clock.now)
+    node._localization_quality = lambda: (clock.now-last_observation.at < 2., 'verified')
+    def refresh(*args):
+        last_observation.at = clock.now
+        return True
+    node._localization_service = Mock(side_effect=refresh)
+    original_spin = node._spin
+    def spin(*args, **kwargs):
+        original_spin(*args, **kwargs)
+        if clock.now >= 108.:
+            node._start_requested.set()
+    node._spin = spin
+    node._wait_for_start()
+    assert node._localization_service.call_count >= 7
+    # Only the final pre-start validation; no periodic full recovery/map clear.
+    node.recover_localization.assert_called_once_with()
+    assert node._deadline >= 288.
+    assert not node._ready
 
 
 def test_retry_wait_cannot_outlive_mission_deadline(tmp_path, monkeypatch):
