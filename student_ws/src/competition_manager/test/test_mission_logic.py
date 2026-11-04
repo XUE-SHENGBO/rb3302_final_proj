@@ -124,6 +124,9 @@ def make_node(tmp_path, monkeypatch, **overrides):
     node._stationary = lambda: True
     node.waitUntilNav2Active = Mock()
     node.wait_for_velocity_guard = Mock()
+    node.ensure_localization = Mock()
+    node.recover_localization = Mock()
+    node._localization_quality = Mock(return_value=(True, 'verified'))
     node._validate = lambda: ('BABA', POSITIONS, None)
     node.stop_task = Mock(return_value=True)
 
@@ -202,6 +205,30 @@ def test_instant_failures_wait_stopped_between_attempts(tmp_path, monkeypatch):
     for call in node._stop_pub.publish.call_args_list:
         msg = call.args[0]
         assert msg.linear.x == msg.linear.y == msg.angular.z == 0.0
+
+
+def test_unverified_startup_never_sends_goal_or_starts_timer(tmp_path, monkeypatch):
+    from competition_manager.localization_guard import LocalizationFailed
+    node, _ = make_node(tmp_path, monkeypatch)
+    node.recover_localization.side_effect = LocalizationFailed('not converged')
+    node._navigate = Mock()
+    with pytest.raises(LocalizationFailed):
+        node.run_mission()
+    node._navigate.assert_not_called()
+    assert node._deadline is None
+    assert not node._ready
+
+
+def test_failed_reconvergence_prevents_another_goal_even_with_skip(tmp_path, monkeypatch):
+    from competition_manager.localization_guard import LocalizationFailed
+    node, _ = make_node(tmp_path, monkeypatch, failure_policy='skip')
+    node._navigate = Mock(side_effect=runtime.GoalFailed('collision'))
+    node.recover_localization.side_effect = [None, LocalizationFailed('not converged')]
+    with pytest.raises(LocalizationFailed):
+        node.run_mission()
+    node.stop_task.assert_called_once()
+    assert node._navigate.call_count == 1
+    assert node._state['visits'][1]['status'] == 'pending'
 
 
 def test_retry_wait_cannot_outlive_mission_deadline(tmp_path, monkeypatch):

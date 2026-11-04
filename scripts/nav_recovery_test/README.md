@@ -22,3 +22,19 @@ The native BT test verifies planner error -> global clear -> one-second wait -> 
 Deployment: save the robot's current source files first, copy the committed files, then rebuild `competition_manager` and `planning_rpp` in `student_ws`. Verify installed XML/Python hashes against source. Restart navigation with `./start2.sh` and create a new mission with `./start3.sh` to use the complete change. Syncing/building alone does not replace already running Python processes or guarantee a running navigator reloads its cached behavior tree. Do not auto-start navigation as part of deployment.
 
 The pre-fix source snapshot is commit `8930465` on branch `codex/knhx-planner-recovery-20261104`. To roll back these changes, restore `start2.sh`, both README files, the mission manager and its test, and the behavior tree from that commit, then rebuild both packages and restart navigation. Do not reset unrelated robot changes.
+
+## Stationary AMCL verification
+
+`localization_guard.py` adds a bounded preparation/recovery gate using current AMCL uncertainty, finite scan matching to saved walls, and consecutive pose stability. It never resets the initial pose, calls global localization, or publishes nonzero velocity. Existing motion/goal tests now supply synthetic AMCL/map/scan data; the recovery integration case deliberately degrades covariance after a failed navigation action and verifies stationary updates followed by global/local refresh before a second goal.
+
+For the recorded KNHX session, freeze its stationary scans and odometry before the first command, then run actual AMCL and the production gate:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+export ROS_DOMAIN_ID=217 ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+python3 scripts/nav_recovery_test/amcl_replay.py /path/to/20261104-080115/bag/bag_0.db3 --output /tmp/amcl-replay.json
+python3 -m pytest -q student_ws/src/competition_manager/test/test_localization_guard.py
+RB3302_ROS_INTEGRATION=1 python3 -m pytest -q student_ws/src/competition_manager/test/test_ros_mission_integration.py
+```
+
+The replay intentionally uses a frozen physical pose and repeated real stationary frames, not a closed-loop robot trajectory. It verifies refinement of a broad initial particle distribution, not the physical KNHX route or every ambiguous map position. An unchanged or incorrectly initialized pose can still fail the bounded gate; the operator must then set the measured pose. Package runtime dependencies remain unchanged.

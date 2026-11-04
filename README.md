@@ -8,6 +8,8 @@ Run `./start1.sh` for hardware, `./start2.sh` for localization/navigation, and `
 
 Set the actual pose with RViz's **2D Pose Estimate**. Enter exactly four target letters, then press Enter again after the mission reports READY. Preparation does not consume the new mission's time budget.
 
+Before READY the mission now refines AMCL while stopped using `/request_nomotion_update`, preserving the current initial pose. Readiness requires fresh scan-time TF, valid covariance (largest XY standard deviation <= 0.15 m; yaw <= 0.20 rad), at least 80% of sampled finite scan endpoints within 0.10 m of saved walls, and three consecutive stable AMCL poses. READY is rechecked while waiting and immediately before starting. Refinement is bounded to 30 seconds / 40 requests; failure stops preparation and asks for the actual pose in RViz. It never calls global relocalization or publishes a guessed pose. On navigation failure the action is canceled and stopping confirmed first; poor localization is refined, then both costmaps are refreshed and allowed to update before retrying. Verified localization is retained. Recovery time counts against the original mission deadline. See [AMCL regression procedure](scripts/nav_recovery_test/README.md).
+
 Implemented behavior:
 
 - Exactly four ordered A–X targets by default, including repeated letters. `./start3.sh --practice` permits other nonempty route lengths.

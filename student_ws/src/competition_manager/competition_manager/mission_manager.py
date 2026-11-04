@@ -16,6 +16,7 @@ from competition_manager.mission_rules import (
     approach_heading, initial_coordinates, load_landmarks, parse_route, positive,
     read_checkpoint, StopWindow, write_checkpoint,
 )
+from competition_manager.localization_guard import DEFAULTS as LOCALIZATION_DEFAULTS, LocalizationGuard
 from geometry_msgs.msg import PoseStamped, Twist
 from lifecycle_msgs.srv import GetState
 from nav2_msgs.action import NavigateToPose
@@ -39,13 +40,14 @@ class GoalFailed(RuntimeError):
     """One visit failed and may be retried under the configured policy."""
 
 
-class MissionManager(BasicNavigator):
+class MissionManager(LocalizationGuard, BasicNavigator):
     """Own one ordered mission; preparation never starts robot motion."""
 
     def __init__(self):
         super().__init__(node_name='mission_manager')
         share = Path(get_package_share_directory('competition_manager'))
         defaults = {
+            **LOCALIZATION_DEFAULTS,
             'goals': '', 'required_goal_count': 4,
             'landmarks_file': str(share / 'config/landmarks.yaml'),
             'map_frame': 'map', 'base_frame': 'base_link', 'odom_topic': '/odom',
@@ -79,6 +81,7 @@ class MissionManager(BasicNavigator):
         self.create_subscription(
             Odometry, self.p('odom_topic'), self._odom_callback, qos_profile_sensor_data)
         self._stop_pub = self.create_publisher(Twist, '/cmd_vel_stop', 10)
+        self._init_localization()
         self.create_service(Trigger, '/mission_manager/start', self._start_callback)
         self.create_service(Trigger, '/mission_manager/status', self._status_callback)
 
@@ -202,6 +205,13 @@ class MissionManager(BasicNavigator):
                      'stopped_angular_tolerance', 'telemetry_timeout_sec', 'tf_timeout_sec',
                      'retry_delay_sec'):
             positive(self.p(name), name)
+        for name in LOCALIZATION_DEFAULTS:
+            positive(self.p(name), name)
+        for name in ('localization_max_updates', 'localization_stable_samples'):
+            if type(self.p(name)) is not int or self.p(name) < 3:
+                raise ValueError(f'{name} must be an integer >= 3')
+        if self.p('localization_min_match_ratio') > 1:
+            raise ValueError('localization_min_match_ratio must be <= 1')
         positive(self.p('dwell_sec'), 'dwell_sec', minimum=3.0)
         if self.p('arrival_timeout_sec') < self.p('dwell_sec'):
             raise ValueError('arrival_timeout_sec must be >= dwell_sec')
@@ -264,7 +274,12 @@ class MissionManager(BasicNavigator):
             self._start_requested.set()
         while not self._start_requested.is_set():
             self._spin()
+            if not self._localization_quality()[0]:
+                self._ready = False
+                self.recover_localization()
+                self._ready = True
         self._ready = False
+        self.recover_localization()
         if self._current_pose() is None or not self._stationary():
             raise RuntimeError('Start rejected: need fresh TF and stationary odometry')
         now = time.monotonic()
@@ -440,6 +455,7 @@ class MissionManager(BasicNavigator):
         self.wait_for_velocity_guard()
         while self._current_pose() is None or not self._stationary():
             self._spin()
+        self.recover_localization(force=True)
         self._wait_for_start()
 #==============================================================================================================
         for index, visit in enumerate(self._state['visits']):                                     # for each goal point
@@ -483,6 +499,7 @@ class MissionManager(BasicNavigator):
                     self._check_deadline()
                     self._record('running')
                     if attempt < self.p('max_retries'):
+                        self.recover_localization()
                         self._wait_before_retry()
                         continue
                     if self.p('failure_policy') == 'skip':
