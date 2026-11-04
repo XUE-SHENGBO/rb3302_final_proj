@@ -1,0 +1,12 @@
+[Unit]
+Description=Read-only PC time endpoint for RB3302 startup
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/usr/bin/python3 /media/lfzyzl/WinShare/Project/rb3302/rb3302_final_proj_code/scripts/pc_time_server.py --bind 192.168.50.92 --port 8765
+Restart=on-failure
+RestartSec=5
+Nice=10
+
+[Install]
+WantedBy=default.target
