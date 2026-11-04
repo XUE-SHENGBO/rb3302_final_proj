@@ -3,6 +3,7 @@
 import argparse
 from dataclasses import dataclass
 import datetime
+import http.client
 import ipaddress
 import json
 import os
@@ -10,7 +11,6 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-import urllib.request
 
 
 @dataclass(frozen=True)
@@ -25,16 +25,21 @@ class Sample:
 
 def probe(host, port, attempts=3, timeout=2., max_rtt=.5):
     ipaddress.IPv4Address(host)
-    # Never use a desktop/system HTTP proxy for a robot LAN clock request.
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     samples = []
     errors = []
     for _ in range(attempts):
+        connection = http.client.HTTPConnection(host, port, timeout=timeout)
         try:
+            # TCP handshake delay is not part of the time exchange. Direct HTTP
+            # also avoids system proxies for this designated LAN address.
+            connection.connect()
             started = time.monotonic_ns()
-            with opener.open(f'http://{host}:{port}/time', timeout=timeout) as response:
-                payload = response.read(4097)
+            connection.request('GET', '/time')
+            response = connection.getresponse()
+            payload = response.read(4097)
             ended = time.monotonic_ns()
+            if response.status != 200:
+                raise ValueError(f'PC time server returned HTTP {response.status}')
             if len(payload) > 4096:
                 raise ValueError('oversized time response')
             value = json.loads(payload)
@@ -46,10 +51,12 @@ def probe(host, port, attempts=3, timeout=2., max_rtt=.5):
             if not 1577836800000000000 <= ns < 4102444800000000000:
                 raise ValueError('PC time is outside 2020–2100')
             if (ended - started) / 1e9 > max_rtt:
-                raise ValueError('time request latency too high')
+                raise ValueError(f'time request latency too high ({(ended-started)/1e6:.2f}ms)')
             samples.append(Sample(ns, ended, ended - started))
-        except (OSError, ValueError) as error:
+        except (OSError, ValueError, http.client.HTTPException) as error:
             errors.append(str(error))
+        finally:
+            connection.close()
     if not samples:
         raise RuntimeError(f'无法请求电脑 {host}:{port} 的时间：' + '; '.join(errors))
     return min(samples, key=lambda s: s.roundtrip_ns)

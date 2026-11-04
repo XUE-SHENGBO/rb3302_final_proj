@@ -55,6 +55,23 @@ def test_check_only_never_changes_clock(monkeypatch):
     assert sync.main() == 0
 
 
+def test_tcp_handshake_time_is_excluded_from_clock_sample(monkeypatch):
+    ticks = [0]
+    class Connection:
+        def __init__(self,*args,**kwargs):pass
+        def connect(self):ticks[0] += 10_000_000_000
+        def request(self,*args):ticks[0] += 10_000_000
+        def getresponse(self):return self
+        status = 200
+        def read(self,*args):
+            ticks[0] += 10_000_000
+            return b'{"protocol":"rb3302-time-v1","unix_ns":1800000000000000000}'
+        def close(self):pass
+    monkeypatch.setattr(sync.http.client,'HTTPConnection',Connection)
+    monkeypatch.setattr(sync.time,'monotonic_ns',lambda:ticks[0])
+    assert sync.probe('127.0.0.1',8765,attempts=1).roundtrip_ns == 20_000_000
+
+
 @pytest.mark.parametrize('body',[b'[]',b'{"protocol":"other","unix_ns":1800000000000000000}',
                                   b'{"protocol":"rb3302-time-v1","unix_ns":true}',b'not json'])
 def test_bad_time_server_cannot_set_robot_clock(body):
