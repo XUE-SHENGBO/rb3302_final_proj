@@ -1,5 +1,25 @@
 # KNHX planning recovery
 
+## Wall-end turning clearance
+
+`turn_clearance.py` rebuilds inflation from recorded global lethal/unknown cells using the installed native Nav2 planner. It compares baseline/candidate K plans, samples the candidate local rectangular footprint at 1 cm path intervals and 5° yaw intervals, and checks that the wider global planning envelope preserves previously reachable landmarks. A rotation sweep is stronger than checking a centerline but still a discrete grid check, not a sensor or hardware guarantee.
+
+```bash
+source /opt/ros/jazzy/setup.bash
+export ROS_DOMAIN_ID=217 ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+python3 scripts/nav_recovery_test/turn_clearance.py \
+  --baseline /path/to/actual-loaded-before.yaml \
+  --candidate student_ws/src/planning_rpp/config/nav2_params.yaml \
+  --case /path/to/test1.db3 1793784891.7735 \
+  --case /path/to/test2.db3 1793784975.9894 \
+  --landmarks student_ws/src/competition_manager/config/landmarks.yaml \
+  --output /tmp/turn-clearance-regression
+```
+
+Only `ComputePathToPose` actions are used; no controller or motion goal is started. The physical robot must load the deployed YAML through a new `start2.sh` session. Existing navigation processes keep their previous settings. Global padding 0.13 m is a planning envelope; local padding remains 0.01 m with the original rectangular body. Cost-based RPP speed scaling remains disabled in this clearance-only change.
+
+2026-11-04 validation: both recorded starting grids produced 41 unsafe baseline rotation-sweep samples and zero candidate unsafe samples. All 24 measured letters remained reachable on both grids. The real Nav2 controller with the maze simulator completed K from the recorded first start in 15.54 seconds, on attempt 1, including the three-second stop; no collision alarm or sampled body contact occurred. Simulation used an explicit known-pose AMCL initialization with small covariance; an earlier launch-only initialization failed the unchanged readiness gate before motion. These results validate planning geometry and an ideal closed-loop turn, not physical scan coverage or the full competition route. The deployed baseline AMCL `update_min_a=0.1`, RPP `max_angular_accel=5.0`, local radius 0.55 m and local scaling 5.0 are preserved; unrelated recorder edits are not part of this fix.
+
 KNHX failed at its first goal K: NavFn returned NO_VALID_PATH (208) immediately, and six mission attempts ended in about 0.25 seconds. Recorded global maps showed an observation-layer obstacle at K while the saved static map was free. This does not establish which scan originally created the mark.
 
 The default `navigate_refresh_local.xml` now wraps planning in its own bounded recovery. Recoverable planner errors clear the global costmap, wait one second for updates, then replan, up to two recoveries. The existing controller/local recovery remains. Nav2 StaticLayer is not clearable; live finite scans still mark obstacles. `inf_is_valid` remains unchanged because the RPLIDAR driver also represents invalid zero-distance readings as infinity. The mission layer waits stopped for `retry_delay_sec=1.0` between failures, with normal deadline and shutdown processing. Exhausted retries still stop the mission.

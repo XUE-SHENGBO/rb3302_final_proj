@@ -25,9 +25,11 @@ Implemented behavior:
 - Atomic progress records in `~/.ros/rb3302/last_mission.json`. `./start3.sh --resume` validates the original route/landmarks and retains the original deadline, including downtime.
 - Read-only deployment diagnostics: `bash scripts/check_robot.sh`. Unknown hardware aliases and system services still require correct machine provisioning.
 
-`planning_rpp` combines A* planning and regulated pure pursuit. Initial transform waiting is 24 hours. Progress checking allows 30 seconds for 0.1 m of translation; angular acceleration limits are 3.2 rad/s². Collision checking remains enabled.
+`planning_rpp` combines A* planning and regulated pure pursuit. Initial transform waiting is 24 hours. Progress checking allows 30 seconds for 0.1 m of translation; RPP angular acceleration is 5.0 rad/s² and the downstream smoother limits it to 3.2 rad/s². Collision checking remains enabled.
 
 The current maze controller uses a 0.15 m lookahead (configured limits 0.15–0.4 m) and rechecks XY during final heading alignment (`goal_checker.stateful=false`). Both laser observation sources explicitly accept heights 0–2 m. Physical AMCL alpha1–alpha5 remain 0.8.
+
+For wall-end turns, global planning reserves a rotation envelope using the same rectangular body as local control but a larger planning padding (0.13 m versus local 0.01 m). The resulting global inscribed radius is 0.235 m, covering the local padded body's 0.166 m circumscribed radius plus grid/interpolation margin. Global inflation extends to 0.55 m. RPP aligns in place above a 0.35 rad path-heading error at 0.6 rad/s; this does not change the 0.20 m/s cruise limit, collision checks, goal tolerance or scan validity rules. After syncing/building, restart `start2.sh` to load the configuration. Recorded-grid tests and simulator results do not replace a physical route retest.
 
 Local simulation uses `./start_sim.sh` and `./sim_mission.sh`, an independent window, domain **86**, and localhost discovery. Its ideal-odometry AMCL noise and initial covariance are generated from `simulator/config.yaml` into `simulator/log/nav2_sim_params.yaml`. That generated file must never replace the physical navigation configuration or be passed to the robot launcher. Do not transfer build/install/log directories between machines.
 

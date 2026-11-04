@@ -13,7 +13,7 @@ amcl:  # 自适应蒙特卡洛定位节点，利用地图、激光和里程计�
     alpha5: 0.8  # 全向运动模型的平移相关噪声系数；当前差速模型不使用此项
     # A→S 实车录包离线重放：更频繁地用雷达修正里程漂移，保留原运动噪声参数。
     update_min_d: 0.05  # 累计平移至少 5 cm 时更新粒子滤波；原 Jazzy 默认值为 25 cm
-    update_min_a: 0.05 # 累计转角至少 0.05 rad 时更新；原 Jazzy 默认值为 0.2 rad
+    update_min_a: 0.1 # 累计转角至少 0.05 rad 时更新；原 Jazzy 默认值为 0.2 rad
     laser_model_type: likelihood_field  # 显式使用本次重放验证的似然场扫描模型
     max_beams: 100  # 每次滤波最多使用 100 条均匀采样的雷达束；默认 60 条
     sigma_hit: 0.10  # 地图墙体与雷达端点匹配的高斯标准差，单位 m；默认 0.20 m
@@ -59,7 +59,7 @@ controller_server:  # 控制器服务节点，根据路径计算底盘速度指�
       min_lookahead_dist: 0.15  # 速度自适应前视距离的下限，仅启用对应开关时生效，单位 m
       max_lookahead_dist: 0.4  # 速度自适应前视距离的上限，仅启用对应开关时生效，单位 m
       lookahead_time: 1.5  # 速度自适应前视的时间尺度，前视距离由速度乘此值计算，单位 s
-      rotate_to_heading_angular_vel: 5.0  # 原地旋转以对齐路径或目标朝向时的目标角速度，单位 rad/s
+      rotate_to_heading_angular_vel: 0.6  # 墙端先低速原地对齐，避免请求超过下游 1 rad/s 限幅
       transform_tolerance: 0.2  # TF 坐标变换的时间容差，单位 s
       use_velocity_scaled_lookahead_dist: false  # 是否按当前速度自适应调整前视距离；false 使用固定前视距离
       min_approach_linear_velocity: 0.05  # 接近路径终点减速时保留的最低线速度，单位 m/s
@@ -72,8 +72,8 @@ controller_server:  # 控制器服务节点，根据路径计算底盘速度指�
       regulated_linear_scaling_min_speed: 0.07  # 曲率或代价调速时的最低线速度；终点减速仍可进一步降低速度，单位 m/s
       allow_reversing: false  # 是否允许沿路径中的倒车段反向行驶；不应与原地朝向对齐同时启用
       use_rotate_to_heading: true  # 是否允许原地旋转以对齐路径起始方向或最终目标朝向
-      rotate_to_heading_min_angle: 0.785  # 触发路径方向原地对齐的最小朝向偏差，单位 rad，0.785 约为 45°
-      max_angular_accel: 3.2  # 原地朝向对齐时的最大角加速度，单位 rad/s²
+      rotate_to_heading_min_angle: 0.35  # 方向偏差超过约 20° 先原地对齐，减少矩形车体切弯扫墙
+      max_angular_accel: 5.0  # 原地朝向对齐时的最大角加速度，单位 rad/s²
 
 local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟踪
   local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟踪
@@ -88,7 +88,7 @@ local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟�
       height: 3  # 代价地图窗口高度，单位 m
       resolution: 0.05  # 代价地图栅格分辨率，即每个栅格边长，单位 m
       # 实测车体约为 0.18 × 0.17 m；轮廓中预留了 base_link 偏移余量。
-      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 底盘坐标系下的机器人多边形轮廓，按顺序列出各顶点 [x, y]，单位 m
+      footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 与全局使用同一矩形车体，保留 base_link 偏移余量
       footprint_padding: 0.01  # 在机器人轮廓外额外增加的安全余量，单位 m
       # 保留静态墙体；控制失败后允许重建局部传感器观测，移除历史残留。
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -110,8 +110,8 @@ local_costmap:  # 局部代价地图配置，用于近距离避障和路径跟�
       inflation_layer:  # 膨胀图层配置，在障碍物周围生成逐渐衰减的代价区域
         plugin: nav2_costmap_2d::InflationLayer  # 插件实现类：障碍物膨胀图层
         enabled: true             # 启用膨胀图层
-        inflation_radius: 0.30    # 障碍物周围的代价膨胀范围，单位 m
-        cost_scaling_factor: 10.0 # 代价随距离增大而衰减的速度
+        inflation_radius: 0.55    # 障碍物周围的代价膨胀范围，单位 m
+        cost_scaling_factor: 5.0 # 保留最近实机值；本次先修复全局转弯净空
       always_send_full_costmap: true  # 是否每次发布完整代价地图；true 不使用增量更新方式
 
 global_costmap:  # 全局代价地图配置，用于全局路径规划
@@ -123,9 +123,11 @@ global_costmap:  # 全局代价地图配置，用于全局路径规划
       global_frame: map  # 全局参考坐标系；map 用于地图导航，odom 用于局部连续运动
       robot_base_frame: base_link  # 机器人底盘坐标系名称，用于查询机器人位姿和轮廓变换
       resolution: 0.05  # 代价地图栅格分辨率，即每个栅格边长，单位 m
-      # 全局规划与局部控制使用相同的机器人轮廓。
+      # 车体矩形与局部相同；规划 padding 单独覆盖转弯时的旋转扫掠。
       footprint: "[[-0.11, -0.105], [0.11, -0.105], [0.11, 0.105], [-0.11, 0.105]]"  # 底盘坐标系下的机器人多边形轮廓，按顺序列出各顶点 [x, y]，单位 m
-      footprint_padding: 0.01  # 在机器人轮廓外额外增加的安全余量，单位 m
+      # 局部带 1cm padding 的外接半径约 0.166m；这里内切半径 0.235m。
+      # NavFn 不搜索车体朝向，需在全局 253 禁行带中预留各朝向的车体空间。
+      footprint_padding: 0.13  # 规划包络，另留 5cm 栅格量化及路径插值余量
       track_unknown_space: true  # 是否保留未知区域标记；true 表示区分未知区域与已知空闲区域
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]  # 按加载顺序列出的代价地图图层插件名称
       static_layer:  # 静态地图图层配置，将地图服务器提供的地图加入代价地图
@@ -144,7 +146,7 @@ global_costmap:  # 全局代价地图配置，用于全局路径规划
       inflation_layer:  # 膨胀图层配置，在障碍物周围生成逐渐衰减的代价区域
         plugin: nav2_costmap_2d::InflationLayer  # 插件实现类：障碍物膨胀图层
         enabled: true             # 启用膨胀图层
-        inflation_radius: 0.30    # 障碍物周围的代价膨胀范围，单位 m
+        inflation_radius: 0.55    # 将墙端较宽的代价梯度用于实际全局寻路
         cost_scaling_factor: 2.0 # 代价随距离增大而衰减的速度
       always_send_full_costmap: true  # 是否每次发布完整代价地图；true 不使用增量更新方式
 
